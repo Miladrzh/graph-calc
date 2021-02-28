@@ -23,8 +23,8 @@ python3 manage.py migrate
 python3 manage.py shell
 ```
 
-- To create an RMAT graph with 1024 nodes, 1024 edges:
+- e.g. In django shell, to create an RMAT graph with 1024 nodes, 1024 edges:
 ```
->>> from generators import kron
->>> kron.generate_and_save_graph(1024, 1024)
+from generators import kron
+kron.generate_and_save_graph(1024, 1024)
 ```   

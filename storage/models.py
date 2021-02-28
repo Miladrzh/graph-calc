@@ -2,9 +2,7 @@ from django.db import models
 
 # Create your models here.
 
-
 generator_choices = [('SNAP_RMAT', 'SNAP_RMAT')]
-
 
 class GeneratedGraph(models.Model):
     file_hash = models.CharField(max_length=16, primary_key=True)
