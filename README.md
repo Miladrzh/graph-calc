@@ -17,6 +17,11 @@ pip3 install -r requirements.txt
 python3 manage.py makemigrations
 python3 manage.py migrate
 ```
+<!-- - if you don't care about existing data
+```
+rm  storage/migrations/*
+rm db.sqlite3
+``` -->
 4) create graphs in django shell (default output dir: `./data/generated-graphs`)
 
 ```

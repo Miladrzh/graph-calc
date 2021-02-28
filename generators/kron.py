@@ -7,15 +7,9 @@ import numpy
 def generate_and_save_graph(node_count=None, edge_count=None):
     from storage.models import GeneratedGraph
     graph_attr = generate_graph(node_count, edge_count)
+    graph_attr['generate_method'] = 'SNAP_RMAT'
 
-    GeneratedGraph.objects.create(
-        file_hash=graph_attr['file_hash'], 
-        generate_method='SNAP_RMAT', 
-        node_count=graph_attr['node_count'],
-        edge_count=graph_attr['edge_count']
-    )
-
-# def calc_stats()
+    GeneratedGraph.objects.create(**graph_attr)
 
 def generate_graph(node_count=None, edge_count=None, dir='./data/generated-graphs/'):
     from stats.stats import calc
@@ -44,7 +38,8 @@ def generate_graph(node_count=None, edge_count=None, dir='./data/generated-graph
     graph_attr = {**graph_attr, **stats} # merge stats into graph attributes
 
     print(file_hash)
-    print(graph_attr)
+    # for key, value in graph_attr.items():
+    #     print(key, value)
     with open(dir + file_hash + '.txt', "w+") as file:
         for EI in Graph.Edges():
             file.write("%d , %d\n" % (EI.GetSrcNId(), EI.GetDstNId()))
