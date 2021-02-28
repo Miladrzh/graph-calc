@@ -60,8 +60,7 @@ def calc(g):
             for stat in ['mean', 'std', 'var']: #TODO more stats?
                 stats[name + '_' + stat] = dist[stat]
 
-        return stats
-
+    stats = {}
     dist_count_funcs = [
         lambda g: g.GetOutDegCnt(),
         lambda g: g.GetInDegCnt(),
@@ -73,7 +72,7 @@ def calc(g):
         'WccSzCnt',
     ]
 
-    stats = calc_count_distributions(dist_count_funcs, dist_count_names)
+    calc_count_distributions(dist_count_funcs, dist_count_names)
     stats['n_triads'] = g.GetTriads()
     stats['clust_coef'], _ = g.GetClustCf(CCfByDeg=True)
     
