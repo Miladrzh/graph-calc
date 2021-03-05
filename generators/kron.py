@@ -7,7 +7,7 @@ import numpy
 
 def generate_and_save_graph(node_count=None, edge_count=None, abcd=None):
     from storage.models import GeneratedGraph
-    graph_attr = generate_graph(node_count, edge_count)
+    graph_attr = generate_graph(node_count, edge_count, abcd)
     graph_attr['generate_method'] = 'SNAP_RMAT'
 
     GeneratedGraph.objects.create(**graph_attr)
@@ -47,4 +47,5 @@ def generate_graph(node_count=None, edge_count=None, abcd=None, dir='./data/gene
         for EI in Graph.Edges():
             file.write("%d , %d\n" % (EI.GetSrcNId(), EI.GetDstNId()))
         file.close()
+    del Graph
     return graph_attr
