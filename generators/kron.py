@@ -38,8 +38,6 @@ def generate_graph(node_count=None, edge_count=None, dir='./data/generated-graph
     graph_attr = {**graph_attr, **stats} # merge stats into graph attributes
 
     print(file_hash)
-    # for key, value in graph_attr.items():
-    #     print(key, value)
     with open(dir + file_hash + '.txt', "w+") as file:
         for EI in Graph.Edges():
             file.write("%d , %d\n" % (EI.GetSrcNId(), EI.GetDstNId()))
