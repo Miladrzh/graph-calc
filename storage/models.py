@@ -3,6 +3,8 @@ from django.db import models
 # Create your models here.
 
 generator_choices = [('SNAP_RMAT', 'SNAP_RMAT')]
+workload_choices = [('2HOP', '2HOP')]
+
 
 class GeneratedGraph(models.Model):
     file_hash = models.CharField(max_length=16, primary_key=True)
@@ -24,3 +26,18 @@ class GeneratedGraph(models.Model):
     def __str__(self):
         return str(self.file_hash) + '  ,  ' + str(self.generate_method) + '  ,  ' + str(self.node_count) + '  ,  ' \
                + str(self.edge_count)
+
+
+class WorkloadResult(models.Model):
+    file_hash = models.ForeignKey(GeneratedGraph, on_delete=models.DO_NOTHING, db_index=True)
+    experiment = models.CharField(max_length=30, choices=generator_choices, db_index=True)
+    duration_var = models.FloatField(null=False, default=-1)
+    duration_avg = models.FloatField(null=False, default=-1)
+    duration_std = models.FloatField(null=False, default=-1)
+    created_at = models.DateTimeField(auto_now_add=True, null=False)
+
+    def __str__(self):
+        return str(self.file_hash) + ' , ' + str(self.experiment)
+
+    class Meta:
+        unique_together = (("file_hash", "experiment"),)
