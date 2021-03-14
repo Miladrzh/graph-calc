@@ -33,3 +33,9 @@ python3 manage.py shell
 from generators import kron
 kron.generate_and_save_graph(1024, 1024)
 ```   
+
+- e.g. to run a benchmark test:
+```
+from workloads import test
+test.run_test()
+```

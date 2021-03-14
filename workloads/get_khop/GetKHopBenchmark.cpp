@@ -111,7 +111,6 @@ double GetKHopBenchmark::runBenchmark()
     // iterate through the nodes in the benchmark specified order
     for (auto source : GetKHopBenchmark::vertexOrder)
     {
-        // cout << "source: " <<  source << endl;
         Vertex start = source;
         int k = 1;
         khopNeighbours[k] = getNeighboursVector(&start, &graph);
@@ -127,9 +126,6 @@ double GetKHopBenchmark::runBenchmark()
                 for (Vertex u : getNeighboursVector(&v, &graph))
                     khopNeighbours[k].push_back(u);
             }
-            // cout << "\t" << k << endl;
-            // for (auto n: khopNeighbours[k]) 
-            //     cout  << "\t\t" << n << endl;
         }
         khopNeighbours.clear(); // clear map and continue to next vertex
     }
