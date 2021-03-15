@@ -1,5 +1,7 @@
 /* example.i */
 %include "std_string.i"
+%include "std_set.i"
+%include "std_vector.i"
 %module GetKHopBenchmark 
 %{
     /* Put header files here or function declarations like below */

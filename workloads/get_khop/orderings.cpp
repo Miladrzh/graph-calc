@@ -43,7 +43,7 @@ std::map<int, int> degreeDistribution(Graph *graph)
 }
 
 // order vertices by degree (descending)
-std::vector<int> degOrdDesc(Graph *graph)
+std::vector<int> degOrdDesc(Graph *graph, std::set<int> *sids)
 {
     std::vector<int> values;
     std::map<int, int> outDeg = getDegrees(graph);
@@ -51,7 +51,9 @@ std::vector<int> degOrdDesc(Graph *graph)
 
     for (std::map<int, int>::iterator it = revOutDeg.begin(); it != revOutDeg.end(); ++it)
     {
-        values.push_back(it->second);
+        // if i is not a sink
+        if (sids->find(it->second) == sids->end())
+            values.push_back(it->second);
     }
     std::reverse(values.begin(), values.end());
     return values;
@@ -59,14 +61,16 @@ std::vector<int> degOrdDesc(Graph *graph)
 
 // order vertices randomly
 // generate a random permutation of 0 to nVertices
-std::vector<int> randomOrd(int nVertices)
+std::vector<int> randomOrd(int nVertices, std::set<int> *sids)
 {
     std::srand(unsigned(std::time(0)));
     std::vector<int> perm;
 
     // set some values:
     for (int i = 1; i < nVertices; ++i)
-        perm.push_back(i); 
+        // if i is not a sink
+        if (sids->find(i) == sids->end())
+            perm.push_back(i); 
 
     // using built-in random generator:
     std::random_shuffle(perm.begin(), perm.end());

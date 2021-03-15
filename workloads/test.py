@@ -10,7 +10,7 @@ def run_test():
     ns = [2**i for i in np.linspace(10, 20, 11)]
     ns = [i*1000 for i in range(1,10)]
     ns = [1000, 5000, 10000, 50000, 100000]
-    ns = [500000, 1000000]
+    ns = [50000, 100000]
 
     params = {}
     for n in ns:
@@ -18,22 +18,39 @@ def run_test():
         for factor in [2, 5, 15, 25, 50]:
             params[n].append(n*factor)
     print(params)
+
     # generate a set of increasingly bigger graphs
 
     # for n_nodes, n_edges_list in params.items():
     #     for n_edges in n_edges_list:
     #         print(n_nodes, n_edges)
     #         kron.generate_and_save_graph(n_nodes, n_edges)
-
+    # return
     # get all the graph currently in db
     from storage.models import GeneratedGraph
     all_entries = GeneratedGraph.objects \
-        .filter(edge_count__gte=7500000) 
+        .filter(edge_count__exact=1000) 
         # .filter(node_count__gte=500000) \
     # all_entries = GeneratedGraph.objects.filter(node_count__lt=500000)
     props = [(e.file_hash, e.node_count, e.edge_count) for e in all_entries]
     print(props)
-    # return
+    
+    prop = props[0]
+    path = os.path.join('./data', 'generated-graphs',
+            prop[0] + '.txt')
+    print(f"running benchmark on {path}")
+    node_count = prop[1]
+    edge_count = prop[2]
+    bmark = B.GetKHopBenchmark(node_count, path, 3, "desc_deg", 100)
+
+    bmark.printAllSinkIds()
+    print(bmark.nSinks)
+    bmark.printVertexOrder()
+    # bmark.runExperiment()
+    # bmark.calcStats()
+
+    return
+
     orders = ['vid', 'random',]
     i = 0
     ks = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]

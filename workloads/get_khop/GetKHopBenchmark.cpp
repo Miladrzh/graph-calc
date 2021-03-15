@@ -1,5 +1,6 @@
 #include "GetKHopBenchmark.h"
-
+#include <boost/tokenizer.hpp>
+#include <boost/algorithm/string.hpp>
 using namespace std;
 using namespace boost;
 using Graph = compressed_sparse_row_graph<>;
@@ -25,18 +26,22 @@ Graph GetKHopBenchmark::readGraph()
     vector<pair<Vertex, Vertex>> edges{};
 
     ifstream ifs(path);
-    // skip the first four commented lines
-    string dummyLine;
-    for (int i = 0; i < 4; i++)
-        getline(ifs, dummyLine);
-    // read graph
+
+    char_separator<char> sep(" , ");
+
+
     for (string s; getline(ifs, s);)
     {
-        int from, to;
-        if (istringstream(s) >> from >> to)
-            edges.emplace_back(from, to);
-        else
-            break;
+
+        string delimiter = " , ";
+        string start = s.substr(0, s.find(delimiter));
+
+        s.erase(0, s.find(delimiter) + delimiter.length());
+
+        int from = stoi(start);
+        int to = stoi(s);
+        
+        edges.emplace_back(from, to);
     }
 
     Graph graph{edges_are_sorted, edges.begin(), edges.end(), vertices};
@@ -45,33 +50,38 @@ Graph GetKHopBenchmark::readGraph()
 
 vector<int> GetKHopBenchmark::calcOrder(string order)
 {
-    vector<int> v = vector<int>{};
+    vector<int> vs = vector<int>{};
     int n = nNodes;
     if (order == "vid")
     {
         for (int i = 0; i < n; i++)
-            v.push_back(i);
+
+            // if i is not a sink
+            if (sids.find(i) == sids.end())
+                vs.push_back(i);
     }
     else if (order == "desc_deg")
     {
-        v = degOrdDesc(&graph);
+        vs = degOrdDesc(&graph, &sids);
     }
     else if (order == "random")
     {
-        v = randomOrd(nNodes);
+        vs = randomOrd(nNodes, &sids);
     }
-    return v;
+    return vs;
 }
 
-GetKHopBenchmark::GetKHopBenchmark(int n, string pth, int k, string o, int nE)
-{
+GetKHopBenchmark::GetKHopBenchmark(size_t n, string pth, int k, string o, int nE)
+{   
     nNodes = n;
     nExpts = nE;
     path = pth;
     K = k;
     order = o;
-    vertexOrder = GetKHopBenchmark::calcOrder(order);
+    nSinks = 0;
     graph = GetKHopBenchmark::readGraph();
+    GetKHopBenchmark::calcAllSinkIds();
+    vertexOrder = GetKHopBenchmark::calcOrder(order);
 }
 
 void GetKHopBenchmark::calcStats()
@@ -103,9 +113,49 @@ void GetKHopBenchmark::runExperiment()
         execTimes.push_back(runBenchmark());
 }
 
+void GetKHopBenchmark::calcAllSinkIds()
+{
+
+    for (size_t i = 0; i < nNodes; i++)
+    {
+        Vertex start = i;
+
+        if (getNeighboursVector(&start, &graph).empty()) {
+            nSinks++;
+            sids.insert(start);
+        }
+    }
+}
+
+vector<int> GetKHopBenchmark::getAllSinkIds()
+{
+    vector<int> vs = vector<int>();
+    for (auto it = sids.begin(); it != sids.end(); ++it)
+    {
+        vs.push_back(*it);
+    }
+    return vs;
+}
+
+void GetKHopBenchmark::printAllSinkIds()
+{
+    vector<int> vs = vector<int>();
+    for (auto it = sids.begin(); it != sids.end(); ++it)
+    {
+        cout << *it << endl;
+    }
+}
+
+
 double GetKHopBenchmark::runBenchmark()
 {   
     map<int, vector<Vertex>> khopNeighbours; // maps k -> neighbour vertices for k-hop
+
+    // filter zero out-degree nodes 
+
+    // keep a set of all neighbours seen
+    // if the size of the set doesn't change after getting the k-neighbours
+    // break
 
     auto t1 = high_resolution_clock::now();
     // iterate through the nodes in the benchmark specified order
@@ -127,7 +177,7 @@ double GetKHopBenchmark::runBenchmark()
                     khopNeighbours[k].push_back(u);
             }
         }
-        khopNeighbours.clear(); // clear map and continue to next vertex
+        khopNeighbours.clear(); // clear vector and continue to next vertex
     }
     auto t2 = high_resolution_clock::now();
 
