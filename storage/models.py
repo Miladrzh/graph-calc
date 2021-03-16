@@ -4,6 +4,7 @@ from django.db import models
 
 generator_choices = [('SNAP_RMAT', 'SNAP_RMAT')]
 workload_choices = [('2HOP', '2HOP')]
+ordering_choices = [('default', 'default'), ('shuffle_random', 'shuffle_random')]
 
 
 class GeneratedGraph(models.Model):
@@ -11,6 +12,7 @@ class GeneratedGraph(models.Model):
     generate_method = models.CharField(max_length=30, choices=generator_choices, null=False)
     node_count = models.IntegerField(null=False, default=-1)
     edge_count = models.IntegerField(null=False, default=-1)
+    ordering = models.CharField(max_length=30, null=False, default='default', choices=ordering_choices)
     OutDegCnt_mean = models.FloatField(null=False, default=-1)
     OutDegCnt_std = models.FloatField(null=False, default=-1)
     OutDegCnt_var = models.FloatField(null=False, default=-1)
