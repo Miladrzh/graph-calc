@@ -27,6 +27,8 @@ class GetKHopBenchmark
 
         size_t nNodes;
         int nSinks;
+        int nIncomps; // number of times a khop query did not complete k hops
+        int nSeenAll; // number of times a khop query returned all the vertices in the graph
         string path;
         string order; 
         int nExpts;

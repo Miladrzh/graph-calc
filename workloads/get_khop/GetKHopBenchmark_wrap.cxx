@@ -4898,6 +4898,110 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_GetKHopBenchmark_nIncomps_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GetKHopBenchmark *arg1 = (GetKHopBenchmark *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject *swig_obj[2] ;
+  
+  if (!SWIG_Python_UnpackTuple(args, "GetKHopBenchmark_nIncomps_set", 2, 2, swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_GetKHopBenchmark, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GetKHopBenchmark_nIncomps_set" "', argument " "1"" of type '" "GetKHopBenchmark *""'"); 
+  }
+  arg1 = reinterpret_cast< GetKHopBenchmark * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "GetKHopBenchmark_nIncomps_set" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  if (arg1) (arg1)->nIncomps = arg2;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_GetKHopBenchmark_nIncomps_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GetKHopBenchmark *arg1 = (GetKHopBenchmark *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_GetKHopBenchmark, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GetKHopBenchmark_nIncomps_get" "', argument " "1"" of type '" "GetKHopBenchmark *""'"); 
+  }
+  arg1 = reinterpret_cast< GetKHopBenchmark * >(argp1);
+  result = (int) ((arg1)->nIncomps);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_GetKHopBenchmark_nSeenAll_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GetKHopBenchmark *arg1 = (GetKHopBenchmark *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject *swig_obj[2] ;
+  
+  if (!SWIG_Python_UnpackTuple(args, "GetKHopBenchmark_nSeenAll_set", 2, 2, swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_GetKHopBenchmark, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GetKHopBenchmark_nSeenAll_set" "', argument " "1"" of type '" "GetKHopBenchmark *""'"); 
+  }
+  arg1 = reinterpret_cast< GetKHopBenchmark * >(argp1);
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "GetKHopBenchmark_nSeenAll_set" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  if (arg1) (arg1)->nSeenAll = arg2;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_GetKHopBenchmark_nSeenAll_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GetKHopBenchmark *arg1 = (GetKHopBenchmark *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_GetKHopBenchmark, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GetKHopBenchmark_nSeenAll_get" "', argument " "1"" of type '" "GetKHopBenchmark *""'"); 
+  }
+  arg1 = reinterpret_cast< GetKHopBenchmark * >(argp1);
+  result = (int) ((arg1)->nSeenAll);
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_GetKHopBenchmark_path_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GetKHopBenchmark *arg1 = (GetKHopBenchmark *) 0 ;
@@ -5685,6 +5789,10 @@ static PyMethodDef SwigMethods[] = {
 	 { "GetKHopBenchmark_nNodes_get", _wrap_GetKHopBenchmark_nNodes_get, METH_O, NULL},
 	 { "GetKHopBenchmark_nSinks_set", _wrap_GetKHopBenchmark_nSinks_set, METH_VARARGS, NULL},
 	 { "GetKHopBenchmark_nSinks_get", _wrap_GetKHopBenchmark_nSinks_get, METH_O, NULL},
+	 { "GetKHopBenchmark_nIncomps_set", _wrap_GetKHopBenchmark_nIncomps_set, METH_VARARGS, NULL},
+	 { "GetKHopBenchmark_nIncomps_get", _wrap_GetKHopBenchmark_nIncomps_get, METH_O, NULL},
+	 { "GetKHopBenchmark_nSeenAll_set", _wrap_GetKHopBenchmark_nSeenAll_set, METH_VARARGS, NULL},
+	 { "GetKHopBenchmark_nSeenAll_get", _wrap_GetKHopBenchmark_nSeenAll_get, METH_O, NULL},
 	 { "GetKHopBenchmark_path_set", _wrap_GetKHopBenchmark_path_set, METH_VARARGS, NULL},
 	 { "GetKHopBenchmark_path_get", _wrap_GetKHopBenchmark_path_get, METH_O, NULL},
 	 { "GetKHopBenchmark_order_set", _wrap_GetKHopBenchmark_order_set, METH_VARARGS, NULL},

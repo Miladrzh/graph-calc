@@ -175,6 +175,8 @@ class GetKHopBenchmark(object):
         _GetKHopBenchmark.GetKHopBenchmark_swiginit(self, _GetKHopBenchmark.new_GetKHopBenchmark(arg2, arg3, arg4, arg5, arg6))
     nNodes = property(_GetKHopBenchmark.GetKHopBenchmark_nNodes_get, _GetKHopBenchmark.GetKHopBenchmark_nNodes_set)
     nSinks = property(_GetKHopBenchmark.GetKHopBenchmark_nSinks_get, _GetKHopBenchmark.GetKHopBenchmark_nSinks_set)
+    nIncomps = property(_GetKHopBenchmark.GetKHopBenchmark_nIncomps_get, _GetKHopBenchmark.GetKHopBenchmark_nIncomps_set)
+    nSeenAll = property(_GetKHopBenchmark.GetKHopBenchmark_nSeenAll_get, _GetKHopBenchmark.GetKHopBenchmark_nSeenAll_set)
     path = property(_GetKHopBenchmark.GetKHopBenchmark_path_get, _GetKHopBenchmark.GetKHopBenchmark_path_set)
     order = property(_GetKHopBenchmark.GetKHopBenchmark_order_get, _GetKHopBenchmark.GetKHopBenchmark_order_set)
     nExpts = property(_GetKHopBenchmark.GetKHopBenchmark_nExpts_get, _GetKHopBenchmark.GetKHopBenchmark_nExpts_set)
