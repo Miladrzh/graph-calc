@@ -75,5 +75,6 @@ def calc(g):
     calc_count_distributions(dist_count_funcs, dist_count_names)
     stats['n_triads'] = g.GetTriads()
     stats['clust_coef'], _ = g.GetClustCf(CCfByDeg=True)
+    # stats['BfsFullDiam'] = g.GetBfsFullDiam(100, True)
     
     return stats

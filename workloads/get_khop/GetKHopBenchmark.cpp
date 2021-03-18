@@ -1,5 +1,6 @@
 #include "GetKHopBenchmark.h"
-
+#include <boost/tokenizer.hpp>
+#include <boost/algorithm/string.hpp>
 using namespace std;
 using namespace boost;
 using Graph = compressed_sparse_row_graph<>;
@@ -8,7 +9,6 @@ using std::chrono::high_resolution_clock;
 using std::chrono::duration_cast;
 using std::chrono::duration;
 using std::chrono::milliseconds;
-
 
 // get a vertex's neighbours as a vector
 vector<Vertex> GetKHopBenchmark::getNeighboursVector(Vertex *vertex, Graph *graph)
@@ -25,18 +25,19 @@ Graph GetKHopBenchmark::readGraph()
     vector<pair<Vertex, Vertex>> edges{};
 
     ifstream ifs(path);
-    // skip the first four commented lines
-    string dummyLine;
-    for (int i = 0; i < 4; i++)
-        getline(ifs, dummyLine);
-    // read graph
+
     for (string s; getline(ifs, s);)
     {
-        int from, to;
-        if (istringstream(s) >> from >> to)
-            edges.emplace_back(from, to);
-        else
-            break;
+
+        string delimiter = " , ";
+        string start = s.substr(0, s.find(delimiter));
+
+        s.erase(0, s.find(delimiter) + delimiter.length());
+
+        int from = stoi(start);
+        int to = stoi(s);
+        
+        edges.emplace_back(from, to);
     }
 
     Graph graph{edges_are_sorted, edges.begin(), edges.end(), vertices};
@@ -45,33 +46,40 @@ Graph GetKHopBenchmark::readGraph()
 
 vector<int> GetKHopBenchmark::calcOrder(string order)
 {
-    vector<int> v = vector<int>{};
+    vector<int> vs = vector<int>{};
     int n = nNodes;
     if (order == "vid")
     {
         for (int i = 0; i < n; i++)
-            v.push_back(i);
+
+            // if i is not a sink
+            if (sids.find(i) == sids.end())
+                vs.push_back(i);
     }
     else if (order == "desc_deg")
     {
-        v = degOrdDesc(&graph);
+        vs = degOrdDesc(&graph, &sids);
     }
     else if (order == "random")
     {
-        v = randomOrd(nNodes);
+        vs = randomOrd(nNodes, &sids);
     }
-    return v;
+    return vs;
 }
 
-GetKHopBenchmark::GetKHopBenchmark(int n, string pth, int k, string o, int nE)
-{
+GetKHopBenchmark::GetKHopBenchmark(size_t n, string pth, int k, string o, int nE)
+{   
     nNodes = n;
     nExpts = nE;
     path = pth;
     K = k;
     order = o;
-    vertexOrder = GetKHopBenchmark::calcOrder(order);
+    nSinks = 0;
+    nIncomps = 0;
+    nSeenAll = 0;
     graph = GetKHopBenchmark::readGraph();
+    GetKHopBenchmark::calcAllSinkIds();
+    vertexOrder = GetKHopBenchmark::calcOrder(order);
 }
 
 void GetKHopBenchmark::calcStats()
@@ -95,6 +103,39 @@ void GetKHopBenchmark::displayStats()
     cout << "Std dev. of time to complete query: " << stdev << " ms." << endl; 
 }
 
+void GetKHopBenchmark::calcAllSinkIds()
+{
+
+    for (size_t i = 0; i < nNodes; i++)
+    {
+        Vertex start = i;
+
+        if (getNeighboursVector(&start, &graph).empty()) {
+            nSinks++;
+            sids.insert(start);
+        }
+    }
+}
+
+vector<int> GetKHopBenchmark::getAllSinkIds()
+{
+    vector<int> vs = vector<int>();
+    for (auto it = sids.begin(); it != sids.end(); ++it)
+    {
+        vs.push_back(*it);
+    }
+    return vs;
+}
+
+void GetKHopBenchmark::printAllSinkIds()
+{
+    vector<int> vs = vector<int>();
+    for (auto it = sids.begin(); it != sids.end(); ++it)
+    {
+        cout << *it << endl;
+    }
+}
+
 void GetKHopBenchmark::runExperiment()
 {
     execTimes = vector<double>();
@@ -105,36 +146,88 @@ void GetKHopBenchmark::runExperiment()
 
 double GetKHopBenchmark::runBenchmark()
 {   
-    map<int, vector<Vertex>> khopNeighbours; // maps k -> neighbour vertices for k-hop
+    vector <Vertex> khopNeighbours[K+1]; // neighbour vertices for kth-hop
+
+    // log execution of query workload
+    ofstream out("log.txt");
+
+    // log growth of neighbour set
+    ofstream outCsv("growth.csv");
+    outCsv << "origNode, k, verticesSeen" << endl;
 
     auto t1 = high_resolution_clock::now();
+
     // iterate through the nodes in the benchmark specified order
-    for (auto source : GetKHopBenchmark::vertexOrder)
+    vector<int> ord = vertexOrder;
+    for (auto it = ord.begin(); it != ord.end(); it++)
     {
-        Vertex start = source;
+        bool goToNextVertex = false;
+        Vertex start = *it;
+
         int k = 1;
         khopNeighbours[k] = getNeighboursVector(&start, &graph);
+
+        out << "query workload for vertex: " << start << endl;
+        out << "k = " << k << endl;
+
+        // keep a set of all neighbours seen
+        // if the size of the set doesn't change after getting the k-neighbours
+        // break
+        // TODO maybe use a bit vector, instead
+        set<Vertex> verticesSeen;
+
+        for (Vertex u : getNeighboursVector(&start, &graph))
+        {   
+            out << k << " hop neighbour: " << u << endl;
+            verticesSeen.insert(u);                    
+        }
+
+        outCsv << start << "," << k << "," << verticesSeen.size()
+                << "," << endl;
+
         while (k < K)
         {
+            size_t oldSize = verticesSeen.size();
             k += 1;
-            khopNeighbours[k] = std::vector<Vertex>();
+            out << "\tk = " << k << endl;
+
             for (Vertex v : khopNeighbours[k - 1])
             {
                 if (getNeighboursVector(&v, &graph).empty())
                     continue;
 
                 for (Vertex u : getNeighboursVector(&v, &graph))
-                    khopNeighbours[k].push_back(u);
+                {   
+                    // if we havent seen this vertex yet, add it to kth list of 
+                    // neighbours 
+                    if (verticesSeen.find(u) == verticesSeen.end())
+                    {
+                        out << "\t" << k << " hop neighbour: " << u << endl;
+                        khopNeighbours[k].push_back(u);
+                        verticesSeen.insert(u); 
+                    }
+                }
+            }
+            outCsv << start << "," << k << "," << verticesSeen.size() << "," << endl;
+            // break the query if no new neighbours were seen
+            if (oldSize == verticesSeen.size()){
+                nIncomps++;
+                if (int(oldSize) == nNodes) nSeenAll++;
+                goToNextVertex = true;
+                break;
             }
         }
-        khopNeighbours.clear(); // clear map and continue to next vertex
+
+        // clear vector and continue to next vertex
+        for (int k = 0; k < K; k++) khopNeighbours[k].clear();
+        if (goToNextVertex) continue;
     }
     auto t2 = high_resolution_clock::now();
 
     /* Getting number of milliseconds as a double. */
     duration<double, std::milli> ms_double = t2 - t1;
 
-    return ms_double.count() ;
+    return ms_double.count();
 }
 
 void GetKHopBenchmark::printVertexOrder()
@@ -147,3 +240,5 @@ void GetKHopBenchmark::printVertexOrder()
         i += 1;
     }
 }
+
+

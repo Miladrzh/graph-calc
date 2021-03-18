@@ -24,6 +24,7 @@ class GeneratedGraph(models.Model):
     WccSzCnt_var = models.FloatField(null=False, default=-1)
     n_triads = models.IntegerField(null=False, default=-1)
     clust_coef = models.FloatField(null=False, default=-1)
+    # BfsFullDiam = models.IntegerField(null=False, default=-1)
 
     def __str__(self):
         return str(self.file_hash) + '  ,  ' + str(self.generate_method) + '  ,  ' + str(self.node_count) + '  ,  ' \

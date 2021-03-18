@@ -14,14 +14,21 @@ class GetKHopBenchmark
         vector<Vertex> getNeighboursVector(Vertex *, Graph *);
         Graph readGraph();
         vector<int> calcOrder(string);
+        vector<int> getAllSinkIds();
+        void calcAllSinkIds();
+        void printAllSinkIds();
         double runBenchmark();
         void runExperiment();
         void displayStats();
         void calcStats();
         void printVertexOrder();
-        GetKHopBenchmark(int, string, int, string, int); 
+        
+        GetKHopBenchmark(size_t, string, int, string, int); 
 
         size_t nNodes;
+        int nSinks;
+        int nIncomps; // number of times a khop query did not complete k hops
+        int nSeenAll; // number of times a khop query returned all the vertices in the graph
         string path;
         string order; 
         int nExpts;
@@ -32,6 +39,7 @@ class GetKHopBenchmark
         map<string, double> stats;
         vector<pair<Vertex, Vertex>> edges{};
         vector<int> vertexOrder;
+        set<int> sids; // node ids for Sink nodes
         vector<double> execTimes;
         Graph graph;
 };
