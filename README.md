@@ -31,5 +31,11 @@ python3 manage.py shell
 - e.g. In django shell, to create an RMAT graph with 1024 nodes, 1024 edges:
 ```
 from generators import kron
-kron.generate_and_save_graph(1024, 1024)
+kron.generate_graph(1024, 1024)
 ```   
+
+- e.g. to run a benchmark test:
+```
+from workloads import test
+test.run_test()
+```
