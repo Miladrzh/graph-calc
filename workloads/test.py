@@ -31,28 +31,27 @@ def run_test():
     # all_entries = GeneratedGraph.objects \
         # .filter(edge_count__exact=1000) 
         # .filter(node_count__gte=500000) \
-    all_entries = GeneratedGraph.objects.filter(node_count__lt=500000)
+    # all_entries = GeneratedGraph.objects.filter(node_count__lt=500000)
+    all_entries = GeneratedGraph.objects.filter(file_hash__exact="alawhr2tvusry8f4")
     props = [(e.file_hash, e.node_count, e.edge_count) for e in all_entries]
     print(props)
-    # prop = props[0]
-    # path = os.path.join('./data', 'generated-graphs',
-    #         prop[0] + '.txt')
-    # print(f"running benchmark on {path}")
-    # node_count = prop[1]
-    # edge_count = prop[2]
-    # bmark = B.GetKHopBenchmark(node_count, path, 3, "vid", 100)
+    prop = props[0]
+    path = os.path.join('./data', 'generated-graphs',
+            prop[0] + '.txt')
+    print(f"running benchmark on {path}")
+    node_count = prop[1]
+    edge_count = prop[2]
+    bmark = B.GetKHopBenchmark(node_count, path, 3, "vid", 1)
 
     # bmark.printAllSinkIds()
-    
     # bmark.printVertexOrder()
     # bmark.runExperiment()
     # bmark.calcStats()
     # print(bmark.nSinks)
-
     # print(bmark.nIncomps / bmark.nExpts)
     # print(bmark.nSeenAll / bmark.nExpts)
 
-    # return
+    return
 
     orders = ['vid', 'random', 'desc_deg']
     i = 0

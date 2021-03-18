@@ -10,7 +10,6 @@ using std::chrono::duration_cast;
 using std::chrono::duration;
 using std::chrono::milliseconds;
 
-
 // get a vertex's neighbours as a vector
 vector<Vertex> GetKHopBenchmark::getNeighboursVector(Vertex *vertex, Graph *graph)
 {
@@ -26,9 +25,6 @@ Graph GetKHopBenchmark::readGraph()
     vector<pair<Vertex, Vertex>> edges{};
 
     ifstream ifs(path);
-
-    char_separator<char> sep(" , ");
-
 
     for (string s; getline(ifs, s);)
     {
@@ -150,49 +146,70 @@ void GetKHopBenchmark::runExperiment()
 
 double GetKHopBenchmark::runBenchmark()
 {   
-    map<int, vector<Vertex>> khopNeighbours; // maps k -> neighbour vertices for k-hop
+    vector <Vertex> khopNeighbours[K+1]; // neighbour vertices for kth-hop
+
+    // log execution of query workload
+    ofstream out("log.txt");
+
+    // log growth of neighbour set
+    ofstream outCsv("growth.csv");
+    outCsv << "origNode, k, verticesSeen" << endl;
 
     auto t1 = high_resolution_clock::now();
+
     // iterate through the nodes in the benchmark specified order
     vector<int> ord = vertexOrder;
     for (auto it = ord.begin(); it != ord.end(); it++)
     {
         bool goToNextVertex = false;
-
         Vertex start = *it;
+
         int k = 1;
         khopNeighbours[k] = getNeighboursVector(&start, &graph);
-        
+
+        out << "query workload for vertex: " << start << endl;
+        out << "k = " << k << endl;
 
         // keep a set of all neighbours seen
         // if the size of the set doesn't change after getting the k-neighbours
         // break
-        set<int> verticesSeen;
+        // TODO maybe use a bit vector, instead
+        set<Vertex> verticesSeen;
 
         for (Vertex u : getNeighboursVector(&start, &graph))
-        {
+        {   
+            out << k << " hop neighbour: " << u << endl;
             verticesSeen.insert(u);                    
         }
+
+        outCsv << start << "," << k << "," << verticesSeen.size()
+                << "," << endl;
+
         while (k < K)
         {
             size_t oldSize = verticesSeen.size();
-
             k += 1;
+            out << "\tk = " << k << endl;
 
-            khopNeighbours[k] = std::vector<Vertex>();
             for (Vertex v : khopNeighbours[k - 1])
             {
                 if (getNeighboursVector(&v, &graph).empty())
                     continue;
 
                 for (Vertex u : getNeighboursVector(&v, &graph))
-                {
-                    khopNeighbours[k].push_back(u);
-                    verticesSeen.insert(u);                    
+                {   
+                    // if we havent seen this vertex yet, add it to kth list of 
+                    // neighbours 
+                    if (verticesSeen.find(u) == verticesSeen.end())
+                    {
+                        out << "\t" << k << " hop neighbour: " << u << endl;
+                        khopNeighbours[k].push_back(u);
+                        verticesSeen.insert(u); 
+                    }
                 }
             }
-
-            // finish/break the query if no new neighbours were seen
+            outCsv << start << "," << k << "," << verticesSeen.size() << "," << endl;
+            // break the query if no new neighbours were seen
             if (oldSize == verticesSeen.size()){
                 nIncomps++;
                 if (int(oldSize) == nNodes) nSeenAll++;
@@ -200,17 +217,17 @@ double GetKHopBenchmark::runBenchmark()
                 break;
             }
         }
-        khopNeighbours.clear(); // clear vector and continue to next vertex
-        if (goToNextVertex) {
-            continue;
-        }
+
+        // clear vector and continue to next vertex
+        for (int k = 0; k < K; k++) khopNeighbours[k].clear();
+        if (goToNextVertex) continue;
     }
     auto t2 = high_resolution_clock::now();
 
     /* Getting number of milliseconds as a double. */
     duration<double, std::milli> ms_double = t2 - t1;
 
-    return ms_double.count() ;
+    return ms_double.count();
 }
 
 void GetKHopBenchmark::printVertexOrder()
