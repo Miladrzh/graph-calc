@@ -11,13 +11,20 @@ using std::chrono::high_resolution_clock;
 using std::chrono::duration_cast;
 using std::chrono::duration;
 using std::chrono::milliseconds;
+typedef boost::graph_traits<Graph>::adjacency_iterator adjacency_it;
+typedef boost::graph_traits<Graph>::vertex_iterator vertex_iter;
 
 // get a vertex's neighbours as a vector
 vector<Vertex> GetKHopBenchmark::getNeighboursVector(Vertex *vertex, Graph *graph)
 {
     vector<Vertex> vec = vector<Vertex>();
-    for (auto [neighbor, end] = adjacent_vertices(*vertex, *graph); neighbor != end; ++neighbor)
-        vec.push_back(*neighbor);
+    vertex_iter vit, vend;
+    adjacency_it neighbour, neighbour_end;
+    // for (auto [neighbor, end] = adjacent_vertices(*vertex, *graph); neighbor != end; ++neighbor)
+    for (tie(neighbour, neighbour_end) = adjacent_vertices(*vertex, *graph); neighbour != neighbour_end; ++neighbour)
+    {
+        vec.push_back(*neighbour);        
+    }
     return vec;
 }
 
@@ -80,8 +87,11 @@ GetKHopBenchmark::GetKHopBenchmark(size_t n, string pth, int k, string o, int nE
     nIncomps = 0;
     nSeenAll = 0;
     graph = GetKHopBenchmark::readGraph();
+    cout << "read Graph" << endl;
     GetKHopBenchmark::calcAllSinkIds();
+    cout << "Calculated sink Ids" << endl;
     vertexOrder = GetKHopBenchmark::calcOrder(order);
+    cout << "Calculated Order" << endl;
 }
 
 void GetKHopBenchmark::calcStats()
@@ -175,7 +185,6 @@ double GetKHopBenchmark::runBenchmark()
         // keep a set of all neighbours seen
         // if the size of the set doesn't change after getting the k-neighbours
         // break
-        // TODO maybe use a bit vector, instead
         dynamic_bitset<> verticesSeen(nNodes);
         for (Vertex u : getNeighboursVector(&start, &graph))
         {   

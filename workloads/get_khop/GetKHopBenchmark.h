@@ -23,7 +23,7 @@ class GetKHopBenchmark
         void calcStats();
         void printVertexOrder();
         
-        GetKHopBenchmark(int, string, int, string, int); 
+        GetKHopBenchmark(size_t, string, int, string, int); 
 
         size_t nNodes;
         int nSinks;
