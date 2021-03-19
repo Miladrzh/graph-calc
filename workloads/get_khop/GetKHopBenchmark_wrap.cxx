@@ -4738,12 +4738,12 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_GetKHopBenchmark(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  size_t arg1 ;
+  int arg1 ;
   std::string arg2 ;
   int arg3 ;
   std::string arg4 ;
   int arg5 ;
-  size_t val1 ;
+  int val1 ;
   int ecode1 = 0 ;
   int val3 ;
   int ecode3 = 0 ;
@@ -4753,11 +4753,11 @@ SWIGINTERN PyObject *_wrap_new_GetKHopBenchmark(PyObject *SWIGUNUSEDPARM(self), 
   GetKHopBenchmark *result = 0 ;
   
   if (!SWIG_Python_UnpackTuple(args, "new_GetKHopBenchmark", 5, 5, swig_obj)) SWIG_fail;
-  ecode1 = SWIG_AsVal_size_t(swig_obj[0], &val1);
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
   if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_GetKHopBenchmark" "', argument " "1"" of type '" "size_t""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_GetKHopBenchmark" "', argument " "1"" of type '" "int""'");
   } 
-  arg1 = static_cast< size_t >(val1);
+  arg1 = static_cast< int >(val1);
   {
     std::string *ptr = (std::string *)0;
     int res = SWIG_AsPtr_std_string(swig_obj[1], &ptr);

@@ -1,6 +1,8 @@
 #include "GetKHopBenchmark.h"
 #include <boost/tokenizer.hpp>
 #include <boost/algorithm/string.hpp>
+#include <boost/dynamic_bitset.hpp>
+
 using namespace std;
 using namespace boost;
 using Graph = compressed_sparse_row_graph<>;
@@ -149,10 +151,10 @@ double GetKHopBenchmark::runBenchmark()
     vector <Vertex> khopNeighbours[K+1]; // neighbour vertices for kth-hop
 
     // log execution of query workload
-    ofstream out("log.txt");
+    ofstream out("./log.txt");
 
     // log growth of neighbour set
-    ofstream outCsv("growth.csv");
+    ofstream outCsv("./growth.csv");
     outCsv << "origNode, k, verticesSeen" << endl;
 
     auto t1 = high_resolution_clock::now();
@@ -174,20 +176,19 @@ double GetKHopBenchmark::runBenchmark()
         // if the size of the set doesn't change after getting the k-neighbours
         // break
         // TODO maybe use a bit vector, instead
-        set<Vertex> verticesSeen;
-
+        dynamic_bitset<> verticesSeen(nNodes);
         for (Vertex u : getNeighboursVector(&start, &graph))
         {   
             out << k << " hop neighbour: " << u << endl;
-            verticesSeen.insert(u);                    
+            verticesSeen[u] = 1;            
         }
 
-        outCsv << start << "," << k << "," << verticesSeen.size()
+        outCsv << start << "," << k << "," << verticesSeen.count()
                 << "," << endl;
 
         while (k < K)
         {
-            size_t oldSize = verticesSeen.size();
+            size_t oldSize = verticesSeen.count();
             k += 1;
             out << "\tk = " << k << endl;
 
@@ -200,17 +201,18 @@ double GetKHopBenchmark::runBenchmark()
                 {   
                     // if we havent seen this vertex yet, add it to kth list of 
                     // neighbours 
-                    if (verticesSeen.find(u) == verticesSeen.end())
+                    if (!verticesSeen[u])
                     {
                         out << "\t" << k << " hop neighbour: " << u << endl;
                         khopNeighbours[k].push_back(u);
-                        verticesSeen.insert(u); 
+                        verticesSeen[u] = 1; 
                     }
                 }
             }
-            outCsv << start << "," << k << "," << verticesSeen.size() << "," << endl;
+
+            outCsv << start << "," << k << "," << verticesSeen.count() << "," << endl;
             // break the query if no new neighbours were seen
-            if (oldSize == verticesSeen.size()){
+            if (oldSize == verticesSeen.count()){
                 nIncomps++;
                 if (int(oldSize) == nNodes) nSeenAll++;
                 goToNextVertex = true;

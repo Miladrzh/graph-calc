@@ -28,11 +28,7 @@ def run_test():
     # return
     # get all the graph currently in db
     from storage.models import GeneratedGraph
-    # all_entries = GeneratedGraph.objects \
-        # .filter(edge_count__exact=1000) 
-        # .filter(node_count__gte=500000) \
-    # all_entries = GeneratedGraph.objects.filter(node_count__lt=500000)
-    all_entries = GeneratedGraph.objects.filter(file_hash__exact="alawhr2tvusry8f4")
+    all_entries = GeneratedGraph.objects.filter(file_hash__exact="u4i9ww0jg52ixxgu")
     props = [(e.file_hash, e.node_count, e.edge_count) for e in all_entries]
     print(props)
     prop = props[0]
@@ -43,13 +39,11 @@ def run_test():
     edge_count = prop[2]
     bmark = B.GetKHopBenchmark(node_count, path, 3, "vid", 1)
 
-    # bmark.printAllSinkIds()
-    # bmark.printVertexOrder()
-    # bmark.runExperiment()
-    # bmark.calcStats()
-    # print(bmark.nSinks)
-    # print(bmark.nIncomps / bmark.nExpts)
-    # print(bmark.nSeenAll / bmark.nExpts)
+    bmark.runExperiment()
+    bmark.calcStats()
+    print(bmark.nSinks)
+    print(bmark.nIncomps / bmark.nExpts)
+    print(bmark.nSeenAll / bmark.nExpts)
 
     return
 
