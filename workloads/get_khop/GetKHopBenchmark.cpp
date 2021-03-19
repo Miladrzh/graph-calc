@@ -9,13 +9,19 @@ using std::chrono::high_resolution_clock;
 using std::chrono::duration_cast;
 using std::chrono::duration;
 using std::chrono::milliseconds;
-
+typedef boost::graph_traits<Graph>::adjacency_iterator adjacency_it;
+typedef boost::graph_traits<Graph>::vertex_iterator vertex_iter;
 // get a vertex's neighbours as a vector
 vector<Vertex> GetKHopBenchmark::getNeighboursVector(Vertex *vertex, Graph *graph)
 {
     vector<Vertex> vec = vector<Vertex>();
-    for (auto [neighbor, end] = adjacent_vertices(*vertex, *graph); neighbor != end; ++neighbor)
-        vec.push_back(*neighbor);
+    vertex_iter vit, vend;
+    adjacency_it neighbour, neighbour_end;
+    // for (auto [neighbor, end] = adjacent_vertices(*vertex, *graph); neighbor != end; ++neighbor)
+    for (tie(neighbour, neighbour_end) = adjacent_vertices(*vertex, *graph); neighbour != neighbour_end; ++neighbour)
+    {
+        vec.push_back(*neighbour);        
+    }
     return vec;
 }
 
@@ -36,7 +42,6 @@ Graph GetKHopBenchmark::readGraph()
 
         int from = stoi(start);
         int to = stoi(s);
-        
         edges.emplace_back(from, to);
     }
 
@@ -78,8 +83,12 @@ GetKHopBenchmark::GetKHopBenchmark(size_t n, string pth, int k, string o, int nE
     nIncomps = 0;
     nSeenAll = 0;
     graph = GetKHopBenchmark::readGraph();
+    cout << "read Graph" << endl;
     GetKHopBenchmark::calcAllSinkIds();
+    cout << "Calculated sink Ids" << endl;
     vertexOrder = GetKHopBenchmark::calcOrder(order);
+    cout << "Calculated Order" << endl;
+
 }
 
 void GetKHopBenchmark::calcStats()
@@ -109,7 +118,6 @@ void GetKHopBenchmark::calcAllSinkIds()
     for (size_t i = 0; i < nNodes; i++)
     {
         Vertex start = i;
-
         if (getNeighboursVector(&start, &graph).empty()) {
             nSinks++;
             sids.insert(start);
@@ -149,16 +157,17 @@ double GetKHopBenchmark::runBenchmark()
     vector <Vertex> khopNeighbours[K+1]; // neighbour vertices for kth-hop
 
     // log execution of query workload
-    ofstream out("log.txt");
+    ofstream out("./log.txt");
 
     // log growth of neighbour set
-    ofstream outCsv("growth.csv");
+    ofstream outCsv("./growth.csv");
     outCsv << "origNode, k, verticesSeen" << endl;
 
     auto t1 = high_resolution_clock::now();
 
     // iterate through the nodes in the benchmark specified order
     vector<int> ord = vertexOrder;
+
     for (auto it = ord.begin(); it != ord.end(); it++)
     {
         bool goToNextVertex = false;

@@ -1,5 +1,9 @@
 # GRAPH CALC (or TBD)
 
+## Requirements
+
+1) `python3`
+2) `swig` >= 4.1.0
 
 ## First time setup
 

@@ -154,3 +154,5 @@ data/
 .vscode/settings.json
 
 scratchpad.md
+
+db.sqlite3
