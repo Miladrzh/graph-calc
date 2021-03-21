@@ -15,6 +15,8 @@ class GetKHopBenchmark
         Graph readGraph();
         vector<int> calcOrder(string);
         vector<int> getAllSinkIds();
+        vector<pair<int, int>> getVectorWeights();
+
         void calcAllSinkIds();
         void printAllSinkIds();
         double runBenchmark();
@@ -22,8 +24,10 @@ class GetKHopBenchmark
         void displayStats();
         void calcStats();
         void printVertexOrder();
-        
-        GetKHopBenchmark(size_t, string, int, string, int); 
+        vector<int> buildCumSum();
+        int sample();
+
+        GetKHopBenchmark(size_t, string, int, string, int, int); 
 
         size_t nNodes;
         int nSinks;
@@ -33,6 +37,7 @@ class GetKHopBenchmark
         string order; 
         int nExpts;
         int K;
+        int nSamples;
         double mean;
         double stdev;
         map<int, vector<Vertex>> khopNeighbours;
@@ -42,6 +47,8 @@ class GetKHopBenchmark
         set<int> sids; // node ids for Sink nodes
         vector<double> execTimes;
         Graph graph;
+        vector<pair<int, int>> sortedWts;
+        vector<int> cumSumWts;
 };
 
 #endif
