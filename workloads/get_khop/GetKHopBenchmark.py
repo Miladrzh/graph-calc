@@ -150,6 +150,9 @@ class GetKHopBenchmark(object):
     def getAllSinkIds(self):
         return _GetKHopBenchmark.GetKHopBenchmark_getAllSinkIds(self)
 
+    def getVectorWeights(self):
+        return _GetKHopBenchmark.GetKHopBenchmark_getVectorWeights(self)
+
     def calcAllSinkIds(self):
         return _GetKHopBenchmark.GetKHopBenchmark_calcAllSinkIds(self)
 
@@ -171,8 +174,14 @@ class GetKHopBenchmark(object):
     def printVertexOrder(self):
         return _GetKHopBenchmark.GetKHopBenchmark_printVertexOrder(self)
 
-    def __init__(self, arg2, arg3, arg4, arg5, arg6):
-        _GetKHopBenchmark.GetKHopBenchmark_swiginit(self, _GetKHopBenchmark.new_GetKHopBenchmark(arg2, arg3, arg4, arg5, arg6))
+    def buildCumSum(self):
+        return _GetKHopBenchmark.GetKHopBenchmark_buildCumSum(self)
+
+    def sample(self):
+        return _GetKHopBenchmark.GetKHopBenchmark_sample(self)
+
+    def __init__(self, arg2, arg3, arg4, arg5, arg6, arg7):
+        _GetKHopBenchmark.GetKHopBenchmark_swiginit(self, _GetKHopBenchmark.new_GetKHopBenchmark(arg2, arg3, arg4, arg5, arg6, arg7))
     nNodes = property(_GetKHopBenchmark.GetKHopBenchmark_nNodes_get, _GetKHopBenchmark.GetKHopBenchmark_nNodes_set)
     nSinks = property(_GetKHopBenchmark.GetKHopBenchmark_nSinks_get, _GetKHopBenchmark.GetKHopBenchmark_nSinks_set)
     nIncomps = property(_GetKHopBenchmark.GetKHopBenchmark_nIncomps_get, _GetKHopBenchmark.GetKHopBenchmark_nIncomps_set)
@@ -181,6 +190,7 @@ class GetKHopBenchmark(object):
     order = property(_GetKHopBenchmark.GetKHopBenchmark_order_get, _GetKHopBenchmark.GetKHopBenchmark_order_set)
     nExpts = property(_GetKHopBenchmark.GetKHopBenchmark_nExpts_get, _GetKHopBenchmark.GetKHopBenchmark_nExpts_set)
     K = property(_GetKHopBenchmark.GetKHopBenchmark_K_get, _GetKHopBenchmark.GetKHopBenchmark_K_set)
+    nSamples = property(_GetKHopBenchmark.GetKHopBenchmark_nSamples_get, _GetKHopBenchmark.GetKHopBenchmark_nSamples_set)
     mean = property(_GetKHopBenchmark.GetKHopBenchmark_mean_get, _GetKHopBenchmark.GetKHopBenchmark_mean_set)
     stdev = property(_GetKHopBenchmark.GetKHopBenchmark_stdev_get, _GetKHopBenchmark.GetKHopBenchmark_stdev_set)
     khopNeighbours = property(_GetKHopBenchmark.GetKHopBenchmark_khopNeighbours_get, _GetKHopBenchmark.GetKHopBenchmark_khopNeighbours_set)
@@ -190,6 +200,8 @@ class GetKHopBenchmark(object):
     sids = property(_GetKHopBenchmark.GetKHopBenchmark_sids_get, _GetKHopBenchmark.GetKHopBenchmark_sids_set)
     execTimes = property(_GetKHopBenchmark.GetKHopBenchmark_execTimes_get, _GetKHopBenchmark.GetKHopBenchmark_execTimes_set)
     graph = property(_GetKHopBenchmark.GetKHopBenchmark_graph_get, _GetKHopBenchmark.GetKHopBenchmark_graph_set)
+    sortedWts = property(_GetKHopBenchmark.GetKHopBenchmark_sortedWts_get, _GetKHopBenchmark.GetKHopBenchmark_sortedWts_set)
+    cumSumWts = property(_GetKHopBenchmark.GetKHopBenchmark_cumSumWts_get, _GetKHopBenchmark.GetKHopBenchmark_cumSumWts_set)
     __swig_destroy__ = _GetKHopBenchmark.delete_GetKHopBenchmark
 
 # Register GetKHopBenchmark in _GetKHopBenchmark:

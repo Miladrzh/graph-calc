@@ -11,6 +11,7 @@ using std::chrono::duration;
 using std::chrono::milliseconds;
 typedef boost::graph_traits<Graph>::adjacency_iterator adjacency_it;
 typedef boost::graph_traits<Graph>::vertex_iterator vertex_iter;
+typedef Graph::vertex_iterator csr_iter;
 // get a vertex's neighbours as a vector
 vector<Vertex> GetKHopBenchmark::getNeighboursVector(Vertex *vertex, Graph *graph)
 {
@@ -72,8 +73,9 @@ vector<int> GetKHopBenchmark::calcOrder(string order)
     return vs;
 }
 
-GetKHopBenchmark::GetKHopBenchmark(size_t n, string pth, int k, string o, int nE)
+GetKHopBenchmark::GetKHopBenchmark(size_t n, string pth, int k, string o, int nE, int ns)
 {   
+    srand(time(0));  // Initialize random number generator.
     nNodes = n;
     nExpts = nE;
     path = pth;
@@ -82,8 +84,11 @@ GetKHopBenchmark::GetKHopBenchmark(size_t n, string pth, int k, string o, int nE
     nSinks = 0;
     nIncomps = 0;
     nSeenAll = 0;
+    nSamples = ns;
     graph = GetKHopBenchmark::readGraph();
     cout << "read Graph" << endl;
+    sortedWts = GetKHopBenchmark::getVectorWeights();
+    cumSumWts = GetKHopBenchmark::buildCumSum();
     GetKHopBenchmark::calcAllSinkIds();
     cout << "Calculated sink Ids" << endl;
     vertexOrder = GetKHopBenchmark::calcOrder(order);
@@ -149,7 +154,52 @@ void GetKHopBenchmark::runExperiment()
     execTimes = vector<double>();
     int nIter = nExpts;
     for (int i = 0; i < nIter; i++) 
-        execTimes.push_back(runBenchmark());
+    {
+        execTimes.push_back(runBenchmark());       
+        cout << "Experiment: " << i << " took " <<
+        execTimes[i] << " ms" << endl;
+    }
+}
+
+vector<pair<int, int>> GetKHopBenchmark::getVectorWeights()
+{
+    vector<pair<int, int>> pairs = vector<pair<int, int>> ();
+
+    csr_iter begin, end;
+    tie(begin, end) = vertices(graph);
+
+    for (csr_iter it = begin; it != end; ++it) {
+        unsigned edges = out_degree(*it, graph);
+
+        pairs.push_back(make_pair(edges, *it));
+    }
+
+    sort(pairs.begin(), pairs.end(), greater<pair<int, int>>());
+
+    return pairs;
+} 
+
+vector<int> GetKHopBenchmark::buildCumSum()
+{   
+    assert (sortedWts.size() > 0);
+    // make cumulative sum of weights   
+    vector<int> cumsum = vector<int>(nNodes);
+    cumsum[0] = sortedWts[0].first;
+    for (int i = 1; i < nNodes; i++){
+        cumsum[i] = cumsum[i-1] + sortedWts[i].first;
+    }
+
+    return cumsum;
+}
+
+int GetKHopBenchmark::sample()
+{
+    int totalWt = cumSumWts.back();
+    int value = rand() % totalWt;
+    int index = lower_bound(cumSumWts.begin(), cumSumWts.end(), value) - cumSumWts.begin();
+    assert (index >= 0 && index < cumSumWts.size());
+    
+    return sortedWts[index].second;
 }
 
 double GetKHopBenchmark::runBenchmark()
@@ -168,7 +218,13 @@ double GetKHopBenchmark::runBenchmark()
     // iterate through the nodes in the benchmark specified order
     vector<int> ord = vertexOrder;
 
-    for (auto it = ord.begin(); it != ord.end(); it++)
+    vector<int> sampledOrd = vector<int>();
+
+    for (int i = 0; i < nSamples; i++){
+        sampledOrd.push_back(sample());
+    }
+
+    for (auto it = sampledOrd.begin(); it != sampledOrd.end(); it++)
     {
         bool goToNextVertex = false;
         Vertex start = *it;
