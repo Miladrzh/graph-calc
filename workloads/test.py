@@ -81,17 +81,17 @@ def run_test():
             # d['clust_coef'] = clust_coef
             # # get the benchmark stats
             # df = df.append(d, ignore_index=True)
-
+            exp_num = 1
             for etime in exec_times:
                 print(etime)
-            # write to workload result model
-            WorkloadResult.objects.create(
-                file_hash=obj, 
-                experiment='2HOP',
-                duration_var=-1, 
-                duration_avg=bmark.mean, 
-                duration_std=bmark.stdev
-            )
+                # write to workload result model
+                WorkloadResult.objects.create(
+                    file_hash=obj, 
+                    experiment='2HOP',
+                    exp_num=exp_num,
+                    duration=etime
+                )
+                exp_num+=1
             del bmark
         # i+=1
         # if i>1:
