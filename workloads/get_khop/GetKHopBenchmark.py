@@ -122,6 +122,218 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _GetKHopBenchmark:
 _GetKHopBenchmark.SwigPyIterator_swigregister(SwigPyIterator)
 
+class IntVector(object):
+    thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
+    __repr__ = _swig_repr
+
+    def iterator(self):
+        return _GetKHopBenchmark.IntVector_iterator(self)
+    def __iter__(self):
+        return self.iterator()
+
+    def __nonzero__(self):
+        return _GetKHopBenchmark.IntVector___nonzero__(self)
+
+    def __bool__(self):
+        return _GetKHopBenchmark.IntVector___bool__(self)
+
+    def __len__(self):
+        return _GetKHopBenchmark.IntVector___len__(self)
+
+    def __getslice__(self, i, j):
+        return _GetKHopBenchmark.IntVector___getslice__(self, i, j)
+
+    def __setslice__(self, *args):
+        return _GetKHopBenchmark.IntVector___setslice__(self, *args)
+
+    def __delslice__(self, i, j):
+        return _GetKHopBenchmark.IntVector___delslice__(self, i, j)
+
+    def __delitem__(self, *args):
+        return _GetKHopBenchmark.IntVector___delitem__(self, *args)
+
+    def __getitem__(self, *args):
+        return _GetKHopBenchmark.IntVector___getitem__(self, *args)
+
+    def __setitem__(self, *args):
+        return _GetKHopBenchmark.IntVector___setitem__(self, *args)
+
+    def pop(self):
+        return _GetKHopBenchmark.IntVector_pop(self)
+
+    def append(self, x):
+        return _GetKHopBenchmark.IntVector_append(self, x)
+
+    def empty(self):
+        return _GetKHopBenchmark.IntVector_empty(self)
+
+    def size(self):
+        return _GetKHopBenchmark.IntVector_size(self)
+
+    def swap(self, v):
+        return _GetKHopBenchmark.IntVector_swap(self, v)
+
+    def begin(self):
+        return _GetKHopBenchmark.IntVector_begin(self)
+
+    def end(self):
+        return _GetKHopBenchmark.IntVector_end(self)
+
+    def rbegin(self):
+        return _GetKHopBenchmark.IntVector_rbegin(self)
+
+    def rend(self):
+        return _GetKHopBenchmark.IntVector_rend(self)
+
+    def clear(self):
+        return _GetKHopBenchmark.IntVector_clear(self)
+
+    def get_allocator(self):
+        return _GetKHopBenchmark.IntVector_get_allocator(self)
+
+    def pop_back(self):
+        return _GetKHopBenchmark.IntVector_pop_back(self)
+
+    def erase(self, *args):
+        return _GetKHopBenchmark.IntVector_erase(self, *args)
+
+    def __init__(self, *args):
+        _GetKHopBenchmark.IntVector_swiginit(self, _GetKHopBenchmark.new_IntVector(*args))
+
+    def push_back(self, x):
+        return _GetKHopBenchmark.IntVector_push_back(self, x)
+
+    def front(self):
+        return _GetKHopBenchmark.IntVector_front(self)
+
+    def back(self):
+        return _GetKHopBenchmark.IntVector_back(self)
+
+    def assign(self, n, x):
+        return _GetKHopBenchmark.IntVector_assign(self, n, x)
+
+    def resize(self, *args):
+        return _GetKHopBenchmark.IntVector_resize(self, *args)
+
+    def insert(self, *args):
+        return _GetKHopBenchmark.IntVector_insert(self, *args)
+
+    def reserve(self, n):
+        return _GetKHopBenchmark.IntVector_reserve(self, n)
+
+    def capacity(self):
+        return _GetKHopBenchmark.IntVector_capacity(self)
+    __swig_destroy__ = _GetKHopBenchmark.delete_IntVector
+
+# Register IntVector in _GetKHopBenchmark:
+_GetKHopBenchmark.IntVector_swigregister(IntVector)
+
+class DoubleVector(object):
+    thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
+    __repr__ = _swig_repr
+
+    def iterator(self):
+        return _GetKHopBenchmark.DoubleVector_iterator(self)
+    def __iter__(self):
+        return self.iterator()
+
+    def __nonzero__(self):
+        return _GetKHopBenchmark.DoubleVector___nonzero__(self)
+
+    def __bool__(self):
+        return _GetKHopBenchmark.DoubleVector___bool__(self)
+
+    def __len__(self):
+        return _GetKHopBenchmark.DoubleVector___len__(self)
+
+    def __getslice__(self, i, j):
+        return _GetKHopBenchmark.DoubleVector___getslice__(self, i, j)
+
+    def __setslice__(self, *args):
+        return _GetKHopBenchmark.DoubleVector___setslice__(self, *args)
+
+    def __delslice__(self, i, j):
+        return _GetKHopBenchmark.DoubleVector___delslice__(self, i, j)
+
+    def __delitem__(self, *args):
+        return _GetKHopBenchmark.DoubleVector___delitem__(self, *args)
+
+    def __getitem__(self, *args):
+        return _GetKHopBenchmark.DoubleVector___getitem__(self, *args)
+
+    def __setitem__(self, *args):
+        return _GetKHopBenchmark.DoubleVector___setitem__(self, *args)
+
+    def pop(self):
+        return _GetKHopBenchmark.DoubleVector_pop(self)
+
+    def append(self, x):
+        return _GetKHopBenchmark.DoubleVector_append(self, x)
+
+    def empty(self):
+        return _GetKHopBenchmark.DoubleVector_empty(self)
+
+    def size(self):
+        return _GetKHopBenchmark.DoubleVector_size(self)
+
+    def swap(self, v):
+        return _GetKHopBenchmark.DoubleVector_swap(self, v)
+
+    def begin(self):
+        return _GetKHopBenchmark.DoubleVector_begin(self)
+
+    def end(self):
+        return _GetKHopBenchmark.DoubleVector_end(self)
+
+    def rbegin(self):
+        return _GetKHopBenchmark.DoubleVector_rbegin(self)
+
+    def rend(self):
+        return _GetKHopBenchmark.DoubleVector_rend(self)
+
+    def clear(self):
+        return _GetKHopBenchmark.DoubleVector_clear(self)
+
+    def get_allocator(self):
+        return _GetKHopBenchmark.DoubleVector_get_allocator(self)
+
+    def pop_back(self):
+        return _GetKHopBenchmark.DoubleVector_pop_back(self)
+
+    def erase(self, *args):
+        return _GetKHopBenchmark.DoubleVector_erase(self, *args)
+
+    def __init__(self, *args):
+        _GetKHopBenchmark.DoubleVector_swiginit(self, _GetKHopBenchmark.new_DoubleVector(*args))
+
+    def push_back(self, x):
+        return _GetKHopBenchmark.DoubleVector_push_back(self, x)
+
+    def front(self):
+        return _GetKHopBenchmark.DoubleVector_front(self)
+
+    def back(self):
+        return _GetKHopBenchmark.DoubleVector_back(self)
+
+    def assign(self, n, x):
+        return _GetKHopBenchmark.DoubleVector_assign(self, n, x)
+
+    def resize(self, *args):
+        return _GetKHopBenchmark.DoubleVector_resize(self, *args)
+
+    def insert(self, *args):
+        return _GetKHopBenchmark.DoubleVector_insert(self, *args)
+
+    def reserve(self, n):
+        return _GetKHopBenchmark.DoubleVector_reserve(self, n)
+
+    def capacity(self):
+        return _GetKHopBenchmark.DoubleVector_capacity(self)
+    __swig_destroy__ = _GetKHopBenchmark.delete_DoubleVector
+
+# Register DoubleVector in _GetKHopBenchmark:
+_GetKHopBenchmark.DoubleVector_swigregister(DoubleVector)
+
 
 def getDegrees(arg1):
     return _GetKHopBenchmark.getDegrees(arg1)
@@ -149,6 +361,9 @@ class GetKHopBenchmark(object):
 
     def getAllSinkIds(self):
         return _GetKHopBenchmark.GetKHopBenchmark_getAllSinkIds(self)
+
+    def getExecTimes(self):
+        return _GetKHopBenchmark.GetKHopBenchmark_getExecTimes(self)
 
     def getVectorWeights(self):
         return _GetKHopBenchmark.GetKHopBenchmark_getVectorWeights(self)

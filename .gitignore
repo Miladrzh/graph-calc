@@ -157,6 +157,6 @@ scratchpad.md
 
 db.sqlite3
 
-log.txt
-growth.csv
-tmp.csv
+./log.txt
+./growth.csv
+./tmp.csv

@@ -73,6 +73,11 @@ vector<int> GetKHopBenchmark::calcOrder(string order)
     return vs;
 }
 
+vector<double> GetKHopBenchmark::getExecTimes()
+{
+    return execTimes;
+}
+
 GetKHopBenchmark::GetKHopBenchmark(size_t n, string pth, int k, string o, int nE, int ns)
 {   
     srand(time(0));  // Initialize random number generator.
@@ -85,6 +90,8 @@ GetKHopBenchmark::GetKHopBenchmark(size_t n, string pth, int k, string o, int nE
     nIncomps = 0;
     nSeenAll = 0;
     nSamples = ns;
+    execTimes = vector<double>();
+
     graph = GetKHopBenchmark::readGraph();
     cout << "read Graph" << endl;
     sortedWts = GetKHopBenchmark::getVectorWeights();
@@ -93,7 +100,6 @@ GetKHopBenchmark::GetKHopBenchmark(size_t n, string pth, int k, string o, int nE
     cout << "Calculated sink Ids" << endl;
     vertexOrder = GetKHopBenchmark::calcOrder(order);
     cout << "Calculated Order" << endl;
-
 }
 
 void GetKHopBenchmark::calcStats()
@@ -151,7 +157,6 @@ void GetKHopBenchmark::printAllSinkIds()
 
 void GetKHopBenchmark::runExperiment()
 {
-    execTimes = vector<double>();
     int nIter = nExpts;
     for (int i = 0; i < nIter; i++) 
     {

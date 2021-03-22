@@ -3,6 +3,10 @@
 %include "std_set.i"
 %include "std_vector.i"
 %module GetKHopBenchmark 
+namespace std {
+   %template(IntVector) vector<int>;
+   %template(DoubleVector) vector<double>;
+}
 %{
     /* Put header files here or function declarations like below */
     #include "orderings.h"

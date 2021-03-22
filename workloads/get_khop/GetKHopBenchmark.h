@@ -14,6 +14,7 @@ class GetKHopBenchmark
         Graph readGraph();
         vector<int> calcOrder(string);
         vector<int> getAllSinkIds();
+        vector<double> getExecTimes();
         vector<pair<int, int>> getVectorWeights();
 
         void calcAllSinkIds();
