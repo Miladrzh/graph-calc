@@ -33,7 +33,7 @@ def run_test():
     all_entries = GeneratedGraph.objects.filter(node_count__lt=2500000)
     props = [(e.file_hash, e.node_count, e.edge_count) for e in all_entries]
 
-    all_entries = GeneratedGraph.objects.filter(edge_count__lte=1500000).filter(ordering='default')
+    all_entries = GeneratedGraph.objects.filter(edge_count__lte=1500000)
     props = [(e.file_hash, e.node_count, e.edge_count, e.OutDegCnt_std, e.clust_coef) for e in all_entries]
     orders = ['vid', 'random', 'desc_deg']
     order = 'vid'
@@ -47,7 +47,7 @@ def run_test():
     print(props)
     nSamples = 100
     print(props)
-    for prop, obj in zip(props[:1], all_entries[:1]):
+    for prop, obj in zip(props[:1], all_entries[:]):
         d = {}
         file_hash = prop[0] 
         path = os.path.join('./', 'data', 'generated-graphs',
@@ -84,6 +84,7 @@ def run_test():
             exp_num = 1
             for etime in exec_times:
                 print(etime)
+                print(exp_num)
                 # write to workload result model
                 WorkloadResult.objects.create(
                     file_hash=obj, 
@@ -93,6 +94,7 @@ def run_test():
                 )
                 exp_num+=1
             del bmark
+
         # i+=1
         # if i>1:
             # break
