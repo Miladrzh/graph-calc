@@ -39,7 +39,7 @@ class WorkloadResult(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, null=False)
 
     class Meta:
-        unique_together = (('file_hash_id', 'experiment', 'exp_num'),)
+        unique_together = (('file_hash', 'experiment', 'exp_num'),)
         # constraints = [
         #     models.UniqueConstraint(fields=['file_hash_id', 'experiment', 'exp_num'])
         # ]
@@ -47,5 +47,3 @@ class WorkloadResult(models.Model):
     def __str__(self):
         return str(self.file_hash) + ' , ' + str(self.experiment)
 
-    class Meta:
-        unique_together = (("file_hash", "experiment"),)
