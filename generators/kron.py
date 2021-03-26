@@ -48,4 +48,6 @@ def get_rmat_graph_object(node_count, edge_count, abcd):
     Rnd = snap.TRnd(random.randint(1, 1000000))
     Graph = snap.GenRMat(
         node_count, edge_count, float(abcd[0]), float(abcd[1]), float(abcd[2]), Rnd)
+
+    # Graph.PrintInfo("Python type TNGraph", "./info-pngraph.txt", False)
     return Graph

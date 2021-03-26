@@ -33,7 +33,7 @@ def run_test():
     all_entries = GeneratedGraph.objects.filter(node_count__lt=2500000)
     props = [(e.file_hash, e.node_count, e.edge_count) for e in all_entries]
 
-    all_entries = GeneratedGraph.objects.filter(edge_count__lte=1500000)
+    all_entries = GeneratedGraph.objects.filter(edge_count__lte=1500000).filter(ordering='default')
     props = [(e.file_hash, e.node_count, e.edge_count, e.OutDegCnt_std, e.clust_coef) for e in all_entries]
     orders = ['vid', 'random', 'desc_deg']
     order = 'vid'
@@ -47,7 +47,14 @@ def run_test():
     print(props)
     nSamples = 100
     print(props)
-    for prop, obj in zip(props[:1], all_entries[:]):
+    
+    # delete all workloads results before running the expt
+    WorkloadResult.objects.all().delete()
+    gcount = 1
+    for prop, obj in zip(props[:], all_entries[:]):
+
+        print(f"experiment #{(gcount)} of {len(props)}")
+        gcount+=1
         d = {}
         file_hash = prop[0] 
         path = os.path.join('./', 'data', 'generated-graphs',
@@ -68,23 +75,10 @@ def run_test():
             bmark.calcStats()
 
             exec_times = np.array(bmark.getExecTimes())
-            # d['node_count'] = node_count
-            # d['edge_count'] = edge_count
-            # d['order'] = order
-            # d['k'] = k
-            # d['mean'] = bmark.mean
-            # d['stdev'] = bmark.stdev
-            # d['n_incompletes'] = bmark.nIncomps / bmark.nExpts
-            # d['n_seen_all'] = bmark.nSeenAll / bmark.nExpts
-            # d['n_sinks'] = bmark.nSinks
-            # d['out_deg_std'] = out_deg_std
-            # d['clust_coef'] = clust_coef
-            # # get the benchmark stats
-            # df = df.append(d, ignore_index=True)
+
             exp_num = 1
             for etime in exec_times:
-                print(etime)
-                print(exp_num)
+                # print(obj.file_hash, exp_num, etime)
                 # write to workload result model
                 WorkloadResult.objects.create(
                     file_hash=obj, 
@@ -94,9 +88,3 @@ def run_test():
                 )
                 exp_num+=1
             del bmark
-
-        # i+=1
-        # if i>1:
-            # break
-
-    # df.to_csv('./tmp.csv')

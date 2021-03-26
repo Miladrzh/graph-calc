@@ -164,3 +164,6 @@ db.sqlite3
 log.txt
 growth.csv
 tmp.csv
+gs.csv
+res.csv
+info-pngraph.txt
