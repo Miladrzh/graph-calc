@@ -4,7 +4,6 @@ import string
 import snap
 import numpy
 
-
 def generate_graph(node_count, edge_count, abcd=(0.57, 0.19, 0.19, 0.05),
                    save_in_db=True,
                    original_indices=True,
@@ -42,7 +41,6 @@ def generate_graph(node_count, edge_count, abcd=(0.57, 0.19, 0.19, 0.05),
             GeneratedGraph.objects.create(**graph_attr)
 
     del Graph
-
 
 def get_rmat_graph_object(node_count, edge_count, abcd):
     Rnd = snap.TRnd(random.randint(1, 1000000))
