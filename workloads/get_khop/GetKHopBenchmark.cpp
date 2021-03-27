@@ -102,6 +102,11 @@ vector<double> GetKHopBenchmark::getExecTimes()
     return execTimes;
 }
 
+vector<int> GetKHopBenchmark::getVsSeen()
+{
+    return vsSeen;
+}
+
 void GetKHopBenchmark::calcStats()
 {
     double sum = accumulate(execTimes.begin(), execTimes.end(), 0.0);
@@ -158,12 +163,16 @@ void GetKHopBenchmark::printAllSinkIds()
 void GetKHopBenchmark::runExperiment()
 {
     execTimes = vector<double>();
+    vsSeen = vector<int>();
     int nIter = nExpts;
     for (int i = 0; i < nIter; i++) 
-    {
-        execTimes.push_back(runBenchmark());       
+    {   
+        pair<double, int> expRes = runBenchmark();
+        execTimes.push_back(expRes.first);       
+        vsSeen.push_back(expRes.second);       
         cout << "Experiment: " << i << " took " <<
-        execTimes[i] << " ms" << endl;
+        execTimes[i] << " ms and saw " << vsSeen[i] << 
+        " total vertices." << endl;
     }
 }
 
@@ -208,7 +217,7 @@ int GetKHopBenchmark::sample()
     return sortedWts[index].second;
 }
 
-double GetKHopBenchmark::runBenchmark()
+pair<double, int> GetKHopBenchmark::runBenchmark()
 {   
     vector <Vertex> khopNeighbours[K+1]; // neighbour vertices for kth-hop
 
@@ -223,15 +232,20 @@ double GetKHopBenchmark::runBenchmark()
 
     // iterate through the nodes in the benchmark specified order
     vector<int> ord = vertexOrder;
-
     vector<int> sampledOrd = vector<int>();
 
     for (int i = 0; i < nSamples; i++){
         sampledOrd.push_back(sample());
     }
 
+    // keep a set of all neighbours seen
+    // if the size of the set doesn't change after getting the k-neighbours
+    // break
+    dynamic_bitset<> verticesSeen(nNodes);
+    int totalVsSeen = 0;
     for (auto it = sampledOrd.begin(); it != sampledOrd.end(); it++)
-    {
+    {   
+        verticesSeen.reset();
         bool goToNextVertex = false;
         Vertex start = *it;
 
@@ -241,14 +255,12 @@ double GetKHopBenchmark::runBenchmark()
         out << "query workload for vertex: " << start << endl;
         out << "k = " << k << endl;
 
-        // keep a set of all neighbours seen
-        // if the size of the set doesn't change after getting the k-neighbours
-        // break
-        dynamic_bitset<> verticesSeen(nNodes);
+        
         for (Vertex u : getNeighboursVector(&start, &graph))
         {   
             out << k << " hop neighbour: " << u << endl;
-            verticesSeen[u] = 1;            
+            verticesSeen[u] = 1;
+            totalVsSeen += 1;            
         }
 
         outCsv << start << "," << k << "," << verticesSeen.count()
@@ -273,7 +285,8 @@ double GetKHopBenchmark::runBenchmark()
                     {
                         out << "\t" << k << " hop neighbour: " << u << endl;
                         khopNeighbours[k].push_back(u);
-                        verticesSeen[u] = 1; 
+                        verticesSeen[u] = 1;
+                        totalVsSeen += 1; 
                     }
                 }
             }
@@ -290,14 +303,18 @@ double GetKHopBenchmark::runBenchmark()
 
         // clear vector and continue to next vertex
         for (int k = 0; k < K; k++) khopNeighbours[k].clear();
-        if (goToNextVertex) continue;
+        if (goToNextVertex) {
+            // verticesSeen.reset();
+            continue;
+        }
     }
     auto t2 = high_resolution_clock::now();
 
     /* Getting number of milliseconds as a double. */
     duration<double, std::milli> ms_double = t2 - t1;
 
-    return ms_double.count();
+    // return make_pair(ms_double.count(), verticesSeen.count());
+    return make_pair(ms_double.count(), totalVsSeen);
 }
 
 void GetKHopBenchmark::printVertexOrder()

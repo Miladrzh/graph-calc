@@ -2674,16 +2674,17 @@ SWIGINTERN PyObject *SWIG_PyStaticMethod_New(PyObject *SWIGUNUSEDPARM(self), PyO
 #define SWIGTYPE_p_std__allocatorT_int_t swig_types[11]
 #define SWIGTYPE_p_std__invalid_argument swig_types[12]
 #define SWIGTYPE_p_std__mapT_int_int_t swig_types[13]
-#define SWIGTYPE_p_std__setT_int_std__lessT_int_t_std__allocatorT_int_t_t swig_types[14]
-#define SWIGTYPE_p_std__vectorT_boost__compressed_sparse_row_graphT_t__vertex_descriptor_std__allocatorT_boost__compressed_sparse_row_graphT_t__vertex_descriptor_t_t swig_types[15]
-#define SWIGTYPE_p_std__vectorT_double_std__allocatorT_double_t_t swig_types[16]
-#define SWIGTYPE_p_std__vectorT_int_std__allocatorT_int_t_t swig_types[17]
-#define SWIGTYPE_p_std__vectorT_std__pairT_boost__compressed_sparse_row_graphT_t__vertex_descriptor_boost__compressed_sparse_row_graphT_t__vertex_descriptor_t_std__allocatorT_std__pairT_boost__compressed_sparse_row_graphT_t__vertex_descriptor_boost__compressed_sparse_row_graphT_t__vertex_descriptor_t_t_t swig_types[18]
-#define SWIGTYPE_p_std__vectorT_std__pairT_int_int_t_std__allocatorT_std__pairT_int_int_t_t_t swig_types[19]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[20]
-#define SWIGTYPE_p_value_type swig_types[21]
-static swig_type_info *swig_types[23];
-static swig_module_info swig_module = {swig_types, 22, 0, 0, 0, 0};
+#define SWIGTYPE_p_std__pairT_double_int_t swig_types[14]
+#define SWIGTYPE_p_std__setT_int_std__lessT_int_t_std__allocatorT_int_t_t swig_types[15]
+#define SWIGTYPE_p_std__vectorT_boost__compressed_sparse_row_graphT_t__vertex_descriptor_std__allocatorT_boost__compressed_sparse_row_graphT_t__vertex_descriptor_t_t swig_types[16]
+#define SWIGTYPE_p_std__vectorT_double_std__allocatorT_double_t_t swig_types[17]
+#define SWIGTYPE_p_std__vectorT_int_std__allocatorT_int_t_t swig_types[18]
+#define SWIGTYPE_p_std__vectorT_std__pairT_boost__compressed_sparse_row_graphT_t__vertex_descriptor_boost__compressed_sparse_row_graphT_t__vertex_descriptor_t_std__allocatorT_std__pairT_boost__compressed_sparse_row_graphT_t__vertex_descriptor_boost__compressed_sparse_row_graphT_t__vertex_descriptor_t_t_t swig_types[19]
+#define SWIGTYPE_p_std__vectorT_std__pairT_int_int_t_std__allocatorT_std__pairT_int_int_t_t_t swig_types[20]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[21]
+#define SWIGTYPE_p_value_type swig_types[22]
+static swig_type_info *swig_types[24];
+static swig_module_info swig_module = {swig_types, 23, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -9617,61 +9618,6 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_GetKHopBenchmark_readGraph(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GetKHopBenchmark *arg1 = (GetKHopBenchmark *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject *swig_obj[1] ;
-  Graph result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_GetKHopBenchmark, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GetKHopBenchmark_readGraph" "', argument " "1"" of type '" "GetKHopBenchmark *""'"); 
-  }
-  arg1 = reinterpret_cast< GetKHopBenchmark * >(argp1);
-  result = (arg1)->readGraph();
-  resultobj = SWIG_NewPointerObj((new Graph(static_cast< const Graph& >(result))), SWIGTYPE_p_boost__compressed_sparse_row_graphT_t, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_GetKHopBenchmark_calcOrder(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GetKHopBenchmark *arg1 = (GetKHopBenchmark *) 0 ;
-  std::string arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject *swig_obj[2] ;
-  std::vector< int > result;
-  
-  if (!SWIG_Python_UnpackTuple(args, "GetKHopBenchmark_calcOrder", 2, 2, swig_obj)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_GetKHopBenchmark, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GetKHopBenchmark_calcOrder" "', argument " "1"" of type '" "GetKHopBenchmark *""'"); 
-  }
-  arg1 = reinterpret_cast< GetKHopBenchmark * >(argp1);
-  {
-    std::string *ptr = (std::string *)0;
-    int res = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
-    if (!SWIG_IsOK(res) || !ptr) {
-      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "GetKHopBenchmark_calcOrder" "', argument " "2"" of type '" "std::string""'"); 
-    }
-    arg2 = *ptr;
-    if (SWIG_IsNewObj(res)) delete ptr;
-  }
-  result = (arg1)->calcOrder(arg2);
-  resultobj = swig::from(static_cast< std::vector< int,std::allocator< int > > >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *_wrap_GetKHopBenchmark_getAllSinkIds(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GetKHopBenchmark *arg1 = (GetKHopBenchmark *) 0 ;
@@ -9741,22 +9687,46 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_GetKHopBenchmark_calcAllSinkIds(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_GetKHopBenchmark_getVsSeen(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GetKHopBenchmark *arg1 = (GetKHopBenchmark *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject *swig_obj[1] ;
+  std::vector< int > result;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
   res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_GetKHopBenchmark, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GetKHopBenchmark_calcAllSinkIds" "', argument " "1"" of type '" "GetKHopBenchmark *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GetKHopBenchmark_getVsSeen" "', argument " "1"" of type '" "GetKHopBenchmark *""'"); 
   }
   arg1 = reinterpret_cast< GetKHopBenchmark * >(argp1);
-  (arg1)->calcAllSinkIds();
-  resultobj = SWIG_Py_Void();
+  result = (arg1)->getVsSeen();
+  resultobj = swig::from(static_cast< std::vector< int,std::allocator< int > > >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_GetKHopBenchmark_readGraph(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GetKHopBenchmark *arg1 = (GetKHopBenchmark *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  Graph result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_GetKHopBenchmark, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GetKHopBenchmark_readGraph" "', argument " "1"" of type '" "GetKHopBenchmark *""'"); 
+  }
+  arg1 = reinterpret_cast< GetKHopBenchmark * >(argp1);
+  result = (arg1)->readGraph();
+  resultobj = SWIG_NewPointerObj((new Graph(static_cast< const Graph& >(result))), SWIGTYPE_p_boost__compressed_sparse_row_graphT_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -9778,95 +9748,6 @@ SWIGINTERN PyObject *_wrap_GetKHopBenchmark_printAllSinkIds(PyObject *SWIGUNUSED
   }
   arg1 = reinterpret_cast< GetKHopBenchmark * >(argp1);
   (arg1)->printAllSinkIds();
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_GetKHopBenchmark_runBenchmark(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GetKHopBenchmark *arg1 = (GetKHopBenchmark *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject *swig_obj[1] ;
-  double result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_GetKHopBenchmark, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GetKHopBenchmark_runBenchmark" "', argument " "1"" of type '" "GetKHopBenchmark *""'"); 
-  }
-  arg1 = reinterpret_cast< GetKHopBenchmark * >(argp1);
-  result = (double)(arg1)->runBenchmark();
-  resultobj = SWIG_From_double(static_cast< double >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_GetKHopBenchmark_runExperiment(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GetKHopBenchmark *arg1 = (GetKHopBenchmark *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject *swig_obj[1] ;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_GetKHopBenchmark, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GetKHopBenchmark_runExperiment" "', argument " "1"" of type '" "GetKHopBenchmark *""'"); 
-  }
-  arg1 = reinterpret_cast< GetKHopBenchmark * >(argp1);
-  (arg1)->runExperiment();
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_GetKHopBenchmark_displayStats(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GetKHopBenchmark *arg1 = (GetKHopBenchmark *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject *swig_obj[1] ;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_GetKHopBenchmark, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GetKHopBenchmark_displayStats" "', argument " "1"" of type '" "GetKHopBenchmark *""'"); 
-  }
-  arg1 = reinterpret_cast< GetKHopBenchmark * >(argp1);
-  (arg1)->displayStats();
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_GetKHopBenchmark_calcStats(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GetKHopBenchmark *arg1 = (GetKHopBenchmark *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject *swig_obj[1] ;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_GetKHopBenchmark, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GetKHopBenchmark_calcStats" "', argument " "1"" of type '" "GetKHopBenchmark *""'"); 
-  }
-  arg1 = reinterpret_cast< GetKHopBenchmark * >(argp1);
-  (arg1)->calcStats();
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -9896,6 +9777,28 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_GetKHopBenchmark_displayStats(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GetKHopBenchmark *arg1 = (GetKHopBenchmark *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_GetKHopBenchmark, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GetKHopBenchmark_displayStats" "', argument " "1"" of type '" "GetKHopBenchmark *""'"); 
+  }
+  arg1 = reinterpret_cast< GetKHopBenchmark * >(argp1);
+  (arg1)->displayStats();
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_GetKHopBenchmark_buildCumSum(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GetKHopBenchmark *arg1 = (GetKHopBenchmark *) 0 ;
@@ -9913,6 +9816,127 @@ SWIGINTERN PyObject *_wrap_GetKHopBenchmark_buildCumSum(PyObject *SWIGUNUSEDPARM
   arg1 = reinterpret_cast< GetKHopBenchmark * >(argp1);
   result = (arg1)->buildCumSum();
   resultobj = swig::from(static_cast< std::vector< int,std::allocator< int > > >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_GetKHopBenchmark_calcOrder(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GetKHopBenchmark *arg1 = (GetKHopBenchmark *) 0 ;
+  std::string arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[2] ;
+  std::vector< int > result;
+  
+  if (!SWIG_Python_UnpackTuple(args, "GetKHopBenchmark_calcOrder", 2, 2, swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_GetKHopBenchmark, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GetKHopBenchmark_calcOrder" "', argument " "1"" of type '" "GetKHopBenchmark *""'"); 
+  }
+  arg1 = reinterpret_cast< GetKHopBenchmark * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    int res = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res) || !ptr) {
+      SWIG_exception_fail(SWIG_ArgError((ptr ? res : SWIG_TypeError)), "in method '" "GetKHopBenchmark_calcOrder" "', argument " "2"" of type '" "std::string""'"); 
+    }
+    arg2 = *ptr;
+    if (SWIG_IsNewObj(res)) delete ptr;
+  }
+  result = (arg1)->calcOrder(arg2);
+  resultobj = swig::from(static_cast< std::vector< int,std::allocator< int > > >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_GetKHopBenchmark_calcAllSinkIds(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GetKHopBenchmark *arg1 = (GetKHopBenchmark *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_GetKHopBenchmark, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GetKHopBenchmark_calcAllSinkIds" "', argument " "1"" of type '" "GetKHopBenchmark *""'"); 
+  }
+  arg1 = reinterpret_cast< GetKHopBenchmark * >(argp1);
+  (arg1)->calcAllSinkIds();
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_GetKHopBenchmark_calcStats(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GetKHopBenchmark *arg1 = (GetKHopBenchmark *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_GetKHopBenchmark, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GetKHopBenchmark_calcStats" "', argument " "1"" of type '" "GetKHopBenchmark *""'"); 
+  }
+  arg1 = reinterpret_cast< GetKHopBenchmark * >(argp1);
+  (arg1)->calcStats();
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_GetKHopBenchmark_runBenchmark(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GetKHopBenchmark *arg1 = (GetKHopBenchmark *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  SwigValueWrapper< std::pair< double,int > > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_GetKHopBenchmark, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GetKHopBenchmark_runBenchmark" "', argument " "1"" of type '" "GetKHopBenchmark *""'"); 
+  }
+  arg1 = reinterpret_cast< GetKHopBenchmark * >(argp1);
+  result = (arg1)->runBenchmark();
+  resultobj = SWIG_NewPointerObj((new std::pair< double,int >(static_cast< const std::pair< double,int >& >(result))), SWIGTYPE_p_std__pairT_double_int_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_GetKHopBenchmark_runExperiment(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GetKHopBenchmark *arg1 = (GetKHopBenchmark *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_GetKHopBenchmark, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GetKHopBenchmark_runExperiment" "', argument " "1"" of type '" "GetKHopBenchmark *""'"); 
+  }
+  arg1 = reinterpret_cast< GetKHopBenchmark * >(argp1);
+  (arg1)->runExperiment();
+  resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
   return NULL;
@@ -10922,6 +10946,58 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_GetKHopBenchmark_vsSeen_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GetKHopBenchmark *arg1 = (GetKHopBenchmark *) 0 ;
+  std::vector< int > *arg2 = (std::vector< int > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject *swig_obj[2] ;
+  
+  if (!SWIG_Python_UnpackTuple(args, "GetKHopBenchmark_vsSeen_set", 2, 2, swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_GetKHopBenchmark, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GetKHopBenchmark_vsSeen_set" "', argument " "1"" of type '" "GetKHopBenchmark *""'"); 
+  }
+  arg1 = reinterpret_cast< GetKHopBenchmark * >(argp1);
+  res2 = SWIG_ConvertPtr(swig_obj[1], &argp2,SWIGTYPE_p_std__vectorT_int_std__allocatorT_int_t_t, 0 |  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "GetKHopBenchmark_vsSeen_set" "', argument " "2"" of type '" "std::vector< int > *""'"); 
+  }
+  arg2 = reinterpret_cast< std::vector< int > * >(argp2);
+  if (arg1) (arg1)->vsSeen = *arg2;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_GetKHopBenchmark_vsSeen_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GetKHopBenchmark *arg1 = (GetKHopBenchmark *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::vector< int > *result = 0 ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_GetKHopBenchmark, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "GetKHopBenchmark_vsSeen_get" "', argument " "1"" of type '" "GetKHopBenchmark *""'"); 
+  }
+  arg1 = reinterpret_cast< GetKHopBenchmark * >(argp1);
+  result = (std::vector< int > *)& ((arg1)->vsSeen);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_int_std__allocatorT_int_t_t, 0 |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_GetKHopBenchmark_graph_set(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GetKHopBenchmark *arg1 = (GetKHopBenchmark *) 0 ;
@@ -11214,19 +11290,20 @@ static PyMethodDef SwigMethods[] = {
 	 { "randomOrd", _wrap_randomOrd, METH_VARARGS, NULL},
 	 { "degreeDistribution", _wrap_degreeDistribution, METH_O, NULL},
 	 { "GetKHopBenchmark_getNeighboursVector", _wrap_GetKHopBenchmark_getNeighboursVector, METH_VARARGS, NULL},
-	 { "GetKHopBenchmark_readGraph", _wrap_GetKHopBenchmark_readGraph, METH_O, NULL},
-	 { "GetKHopBenchmark_calcOrder", _wrap_GetKHopBenchmark_calcOrder, METH_VARARGS, NULL},
 	 { "GetKHopBenchmark_getAllSinkIds", _wrap_GetKHopBenchmark_getAllSinkIds, METH_O, NULL},
 	 { "GetKHopBenchmark_getVectorWeights", _wrap_GetKHopBenchmark_getVectorWeights, METH_O, NULL},
 	 { "GetKHopBenchmark_getExecTimes", _wrap_GetKHopBenchmark_getExecTimes, METH_O, NULL},
-	 { "GetKHopBenchmark_calcAllSinkIds", _wrap_GetKHopBenchmark_calcAllSinkIds, METH_O, NULL},
+	 { "GetKHopBenchmark_getVsSeen", _wrap_GetKHopBenchmark_getVsSeen, METH_O, NULL},
+	 { "GetKHopBenchmark_readGraph", _wrap_GetKHopBenchmark_readGraph, METH_O, NULL},
 	 { "GetKHopBenchmark_printAllSinkIds", _wrap_GetKHopBenchmark_printAllSinkIds, METH_O, NULL},
+	 { "GetKHopBenchmark_printVertexOrder", _wrap_GetKHopBenchmark_printVertexOrder, METH_O, NULL},
+	 { "GetKHopBenchmark_displayStats", _wrap_GetKHopBenchmark_displayStats, METH_O, NULL},
+	 { "GetKHopBenchmark_buildCumSum", _wrap_GetKHopBenchmark_buildCumSum, METH_O, NULL},
+	 { "GetKHopBenchmark_calcOrder", _wrap_GetKHopBenchmark_calcOrder, METH_VARARGS, NULL},
+	 { "GetKHopBenchmark_calcAllSinkIds", _wrap_GetKHopBenchmark_calcAllSinkIds, METH_O, NULL},
+	 { "GetKHopBenchmark_calcStats", _wrap_GetKHopBenchmark_calcStats, METH_O, NULL},
 	 { "GetKHopBenchmark_runBenchmark", _wrap_GetKHopBenchmark_runBenchmark, METH_O, NULL},
 	 { "GetKHopBenchmark_runExperiment", _wrap_GetKHopBenchmark_runExperiment, METH_O, NULL},
-	 { "GetKHopBenchmark_displayStats", _wrap_GetKHopBenchmark_displayStats, METH_O, NULL},
-	 { "GetKHopBenchmark_calcStats", _wrap_GetKHopBenchmark_calcStats, METH_O, NULL},
-	 { "GetKHopBenchmark_printVertexOrder", _wrap_GetKHopBenchmark_printVertexOrder, METH_O, NULL},
-	 { "GetKHopBenchmark_buildCumSum", _wrap_GetKHopBenchmark_buildCumSum, METH_O, NULL},
 	 { "GetKHopBenchmark_sample", _wrap_GetKHopBenchmark_sample, METH_O, NULL},
 	 { "new_GetKHopBenchmark", _wrap_new_GetKHopBenchmark, METH_VARARGS, NULL},
 	 { "GetKHopBenchmark_nNodes_set", _wrap_GetKHopBenchmark_nNodes_set, METH_VARARGS, NULL},
@@ -11263,6 +11340,8 @@ static PyMethodDef SwigMethods[] = {
 	 { "GetKHopBenchmark_sids_get", _wrap_GetKHopBenchmark_sids_get, METH_O, NULL},
 	 { "GetKHopBenchmark_execTimes_set", _wrap_GetKHopBenchmark_execTimes_set, METH_VARARGS, NULL},
 	 { "GetKHopBenchmark_execTimes_get", _wrap_GetKHopBenchmark_execTimes_get, METH_O, NULL},
+	 { "GetKHopBenchmark_vsSeen_set", _wrap_GetKHopBenchmark_vsSeen_set, METH_VARARGS, NULL},
+	 { "GetKHopBenchmark_vsSeen_get", _wrap_GetKHopBenchmark_vsSeen_get, METH_O, NULL},
 	 { "GetKHopBenchmark_graph_set", _wrap_GetKHopBenchmark_graph_set, METH_VARARGS, NULL},
 	 { "GetKHopBenchmark_graph_get", _wrap_GetKHopBenchmark_graph_get, METH_O, NULL},
 	 { "GetKHopBenchmark_sortedWts_set", _wrap_GetKHopBenchmark_sortedWts_set, METH_VARARGS, NULL},
@@ -11296,6 +11375,7 @@ static swig_type_info _swigt__p_std__allocatorT_double_t = {"_p_std__allocatorT_
 static swig_type_info _swigt__p_std__allocatorT_int_t = {"_p_std__allocatorT_int_t", "std::vector< int >::allocator_type *|std::allocator< int > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__invalid_argument = {"_p_std__invalid_argument", "std::invalid_argument *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__mapT_int_int_t = {"_p_std__mapT_int_int_t", "std::map< int,int > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__pairT_double_int_t = {"_p_std__pairT_double_int_t", "std::pair< double,int > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__setT_int_std__lessT_int_t_std__allocatorT_int_t_t = {"_p_std__setT_int_std__lessT_int_t_std__allocatorT_int_t_t", "std::set< int,std::less< int >,std::allocator< int > > *|std::set< int > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__vectorT_boost__compressed_sparse_row_graphT_t__vertex_descriptor_std__allocatorT_boost__compressed_sparse_row_graphT_t__vertex_descriptor_t_t = {"_p_std__vectorT_boost__compressed_sparse_row_graphT_t__vertex_descriptor_std__allocatorT_boost__compressed_sparse_row_graphT_t__vertex_descriptor_t_t", "std::vector< boost::compressed_sparse_row_graph< >::vertex_descriptor > *|std::vector< boost::compressed_sparse_row_graph< >::vertex_descriptor,std::allocator< boost::compressed_sparse_row_graph< >::vertex_descriptor > > *|std::vector< Vertex > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__vectorT_double_std__allocatorT_double_t_t = {"_p_std__vectorT_double_std__allocatorT_double_t_t", "std::vector< double,std::allocator< double > > *|std::vector< double > *", 0, 0, (void*)0, 0};
@@ -11320,6 +11400,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_std__allocatorT_int_t,
   &_swigt__p_std__invalid_argument,
   &_swigt__p_std__mapT_int_int_t,
+  &_swigt__p_std__pairT_double_int_t,
   &_swigt__p_std__setT_int_std__lessT_int_t_std__allocatorT_int_t_t,
   &_swigt__p_std__vectorT_boost__compressed_sparse_row_graphT_t__vertex_descriptor_std__allocatorT_boost__compressed_sparse_row_graphT_t__vertex_descriptor_t_t,
   &_swigt__p_std__vectorT_double_std__allocatorT_double_t_t,
@@ -11344,6 +11425,7 @@ static swig_cast_info _swigc__p_std__allocatorT_double_t[] = {  {&_swigt__p_std_
 static swig_cast_info _swigc__p_std__allocatorT_int_t[] = {  {&_swigt__p_std__allocatorT_int_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__invalid_argument[] = {  {&_swigt__p_std__invalid_argument, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__mapT_int_int_t[] = {  {&_swigt__p_std__mapT_int_int_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__pairT_double_int_t[] = {  {&_swigt__p_std__pairT_double_int_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__setT_int_std__lessT_int_t_std__allocatorT_int_t_t[] = {  {&_swigt__p_std__setT_int_std__lessT_int_t_std__allocatorT_int_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorT_boost__compressed_sparse_row_graphT_t__vertex_descriptor_std__allocatorT_boost__compressed_sparse_row_graphT_t__vertex_descriptor_t_t[] = {  {&_swigt__p_std__vectorT_boost__compressed_sparse_row_graphT_t__vertex_descriptor_std__allocatorT_boost__compressed_sparse_row_graphT_t__vertex_descriptor_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__vectorT_double_std__allocatorT_double_t_t[] = {  {&_swigt__p_std__vectorT_double_std__allocatorT_double_t_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -11368,6 +11450,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_std__allocatorT_int_t,
   _swigc__p_std__invalid_argument,
   _swigc__p_std__mapT_int_int_t,
+  _swigc__p_std__pairT_double_int_t,
   _swigc__p_std__setT_int_std__lessT_int_t_std__allocatorT_int_t_t,
   _swigc__p_std__vectorT_boost__compressed_sparse_row_graphT_t__vertex_descriptor_std__allocatorT_boost__compressed_sparse_row_graphT_t__vertex_descriptor_t_t,
   _swigc__p_std__vectorT_double_std__allocatorT_double_t_t,

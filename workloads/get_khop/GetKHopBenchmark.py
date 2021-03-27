@@ -353,12 +353,6 @@ class GetKHopBenchmark(object):
     def getNeighboursVector(self, arg2, arg3):
         return _GetKHopBenchmark.GetKHopBenchmark_getNeighboursVector(self, arg2, arg3)
 
-    def readGraph(self):
-        return _GetKHopBenchmark.GetKHopBenchmark_readGraph(self)
-
-    def calcOrder(self, arg2):
-        return _GetKHopBenchmark.GetKHopBenchmark_calcOrder(self, arg2)
-
     def getAllSinkIds(self):
         return _GetKHopBenchmark.GetKHopBenchmark_getAllSinkIds(self)
 
@@ -368,29 +362,38 @@ class GetKHopBenchmark(object):
     def getExecTimes(self):
         return _GetKHopBenchmark.GetKHopBenchmark_getExecTimes(self)
 
-    def calcAllSinkIds(self):
-        return _GetKHopBenchmark.GetKHopBenchmark_calcAllSinkIds(self)
+    def getVsSeen(self):
+        return _GetKHopBenchmark.GetKHopBenchmark_getVsSeen(self)
+
+    def readGraph(self):
+        return _GetKHopBenchmark.GetKHopBenchmark_readGraph(self)
 
     def printAllSinkIds(self):
         return _GetKHopBenchmark.GetKHopBenchmark_printAllSinkIds(self)
+
+    def printVertexOrder(self):
+        return _GetKHopBenchmark.GetKHopBenchmark_printVertexOrder(self)
+
+    def displayStats(self):
+        return _GetKHopBenchmark.GetKHopBenchmark_displayStats(self)
+
+    def buildCumSum(self):
+        return _GetKHopBenchmark.GetKHopBenchmark_buildCumSum(self)
+
+    def calcOrder(self, arg2):
+        return _GetKHopBenchmark.GetKHopBenchmark_calcOrder(self, arg2)
+
+    def calcAllSinkIds(self):
+        return _GetKHopBenchmark.GetKHopBenchmark_calcAllSinkIds(self)
+
+    def calcStats(self):
+        return _GetKHopBenchmark.GetKHopBenchmark_calcStats(self)
 
     def runBenchmark(self):
         return _GetKHopBenchmark.GetKHopBenchmark_runBenchmark(self)
 
     def runExperiment(self):
         return _GetKHopBenchmark.GetKHopBenchmark_runExperiment(self)
-
-    def displayStats(self):
-        return _GetKHopBenchmark.GetKHopBenchmark_displayStats(self)
-
-    def calcStats(self):
-        return _GetKHopBenchmark.GetKHopBenchmark_calcStats(self)
-
-    def printVertexOrder(self):
-        return _GetKHopBenchmark.GetKHopBenchmark_printVertexOrder(self)
-
-    def buildCumSum(self):
-        return _GetKHopBenchmark.GetKHopBenchmark_buildCumSum(self)
 
     def sample(self):
         return _GetKHopBenchmark.GetKHopBenchmark_sample(self)
@@ -414,6 +417,7 @@ class GetKHopBenchmark(object):
     vertexOrder = property(_GetKHopBenchmark.GetKHopBenchmark_vertexOrder_get, _GetKHopBenchmark.GetKHopBenchmark_vertexOrder_set)
     sids = property(_GetKHopBenchmark.GetKHopBenchmark_sids_get, _GetKHopBenchmark.GetKHopBenchmark_sids_set)
     execTimes = property(_GetKHopBenchmark.GetKHopBenchmark_execTimes_get, _GetKHopBenchmark.GetKHopBenchmark_execTimes_set)
+    vsSeen = property(_GetKHopBenchmark.GetKHopBenchmark_vsSeen_get, _GetKHopBenchmark.GetKHopBenchmark_vsSeen_set)
     graph = property(_GetKHopBenchmark.GetKHopBenchmark_graph_get, _GetKHopBenchmark.GetKHopBenchmark_graph_set)
     sortedWts = property(_GetKHopBenchmark.GetKHopBenchmark_sortedWts_get, _GetKHopBenchmark.GetKHopBenchmark_sortedWts_set)
     cumSumWts = property(_GetKHopBenchmark.GetKHopBenchmark_cumSumWts_get, _GetKHopBenchmark.GetKHopBenchmark_cumSumWts_set)

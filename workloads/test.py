@@ -75,7 +75,9 @@ def run_test():
             bmark.calcStats()
 
             exec_times = np.array(bmark.getExecTimes())
+            vs_seen = np.array(bmark.getVsSeen())
 
+            print(vs_seen);
             exp_num = 1
             for etime in exec_times:
                 # print(obj.file_hash, exp_num, etime)
