@@ -37,6 +37,7 @@ class WorkloadResult(models.Model):
     exp_num = models.IntegerField(null=False, default=-1)
     duration = models.FloatField(null=False, default=-1)
     created_at = models.DateTimeField(auto_now_add=True, null=False)
+    result = models.IntegerField(null=False, default=-1) # vs_seen
 
     class Meta:
         unique_together = (('file_hash', 'experiment', 'exp_num'),)

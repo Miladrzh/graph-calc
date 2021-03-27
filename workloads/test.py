@@ -79,14 +79,15 @@ def run_test():
 
             print(vs_seen);
             exp_num = 1
-            for etime in exec_times:
+            for etime, vs in zip(exec_times, vs_seen):
                 # print(obj.file_hash, exp_num, etime)
                 # write to workload result model
                 WorkloadResult.objects.create(
                     file_hash=obj, 
                     experiment='2HOP',
                     exp_num=exp_num,
-                    duration=etime
+                    duration=etime,
+                    result=vs,
                 )
                 exp_num+=1
             del bmark
