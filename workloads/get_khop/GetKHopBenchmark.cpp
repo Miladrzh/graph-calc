@@ -97,6 +97,11 @@ GetKHopBenchmark::GetKHopBenchmark(size_t n, string pth, int k, string o, int nE
     cout << "Calculated Order" << endl;
 }
 
+vector<double> GetKHopBenchmark::getExecTimes()
+{
+    return execTimes;
+}
+
 void GetKHopBenchmark::calcStats()
 {
     double sum = accumulate(execTimes.begin(), execTimes.end(), 0.0);

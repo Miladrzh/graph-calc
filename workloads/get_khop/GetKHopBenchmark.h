@@ -15,7 +15,7 @@ class GetKHopBenchmark
         vector<int> calcOrder(string);
         vector<int> getAllSinkIds();
         vector<pair<int, int>> getVectorWeights();
-
+        vector<double> getExecTimes();
         void calcAllSinkIds();
         void printAllSinkIds();
         double runBenchmark();

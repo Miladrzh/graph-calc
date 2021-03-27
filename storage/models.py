@@ -32,15 +32,14 @@ class GeneratedGraph(models.Model):
 
 
 class WorkloadResult(models.Model):
-    file_hash = models.ForeignKey(GeneratedGraph, on_delete=models.DO_NOTHING, db_index=True)
-    experiment = models.CharField(max_length=30, choices=generator_choices, db_index=True)
-    duration_var = models.FloatField(null=False, default=-1)
-    duration_avg = models.FloatField(null=False, default=-1)
-    duration_std = models.FloatField(null=False, default=-1)
+    file_hash = models.ForeignKey(GeneratedGraph, on_delete=models.DO_NOTHING)
+    experiment = models.CharField(max_length=30, choices=generator_choices)
+    exp_num = models.IntegerField(null=False, default=-1)
+    duration = models.FloatField(null=False, default=-1)
     created_at = models.DateTimeField(auto_now_add=True, null=False)
+
+    class Meta:
+        unique_together = (('file_hash', 'experiment', 'exp_num'),)
 
     def __str__(self):
         return str(self.file_hash) + ' , ' + str(self.experiment)
-
-    class Meta:
-        unique_together = (("file_hash", "experiment"),)
