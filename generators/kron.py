@@ -4,7 +4,6 @@ import string
 import snap
 import numpy
 
-
 def generate_graph(node_count, edge_count, abcd=(0.57, 0.19, 0.19, 0.05),
                    save_in_db=True,
                    original_indices=True,
@@ -32,9 +31,14 @@ def generate_graph(node_count, edge_count, abcd=(0.57, 0.19, 0.19, 0.05),
 
     if shuffled_indices:
         indices_map = numpy.random.permutation(node_count)
+
+        ts = [(indices_map[EI.GetSrcNId()], indices_map[EI.GetDstNId()]) for EI in Graph.Edges()]
+
+        ts = sorted(ts)
+
         with open(dir + 'shuffled_' + file_hash + '.txt', "w+") as file:
-            for EI in Graph.Edges():
-                file.write("%d , %d\n" % (indices_map[EI.GetSrcNId()], indices_map[EI.GetDstNId()]))
+            for EI in ts:
+                file.write("%d , %d\n" % (EI[0], EI[1]))
             file.close()
         if save_in_db:
             from storage.models import GeneratedGraph
@@ -42,7 +46,6 @@ def generate_graph(node_count, edge_count, abcd=(0.57, 0.19, 0.19, 0.05),
             GeneratedGraph.objects.create(**graph_attr)
 
     del Graph
-
 
 def get_rmat_graph_object(node_count, edge_count, abcd):
     Rnd = snap.TRnd(random.randint(1, 1000000))
