@@ -368,6 +368,9 @@ class GetKHopBenchmark(object):
     def readGraph(self):
         return _GetKHopBenchmark.GetKHopBenchmark_readGraph(self)
 
+    def readMap(self):
+        return _GetKHopBenchmark.GetKHopBenchmark_readMap(self)
+
     def printAllSinkIds(self):
         return _GetKHopBenchmark.GetKHopBenchmark_printAllSinkIds(self)
 
@@ -389,14 +392,20 @@ class GetKHopBenchmark(object):
     def calcStats(self):
         return _GetKHopBenchmark.GetKHopBenchmark_calcStats(self)
 
-    def runBenchmark(self):
-        return _GetKHopBenchmark.GetKHopBenchmark_runBenchmark(self)
+    def runBenchmark(self, arg2):
+        return _GetKHopBenchmark.GetKHopBenchmark_runBenchmark(self, arg2)
 
     def runExperiment(self):
         return _GetKHopBenchmark.GetKHopBenchmark_runExperiment(self)
 
     def sample(self):
         return _GetKHopBenchmark.GetKHopBenchmark_sample(self)
+
+    def write_vector_to_file(self, arg2, arg3):
+        return _GetKHopBenchmark.GetKHopBenchmark_write_vector_to_file(self, arg2, arg3)
+
+    def read_vector_from_file(self, arg2):
+        return _GetKHopBenchmark.GetKHopBenchmark_read_vector_from_file(self, arg2)
 
     def __init__(self, arg2, arg3, arg4, arg5, arg6, arg7):
         _GetKHopBenchmark.GetKHopBenchmark_swiginit(self, _GetKHopBenchmark.new_GetKHopBenchmark(arg2, arg3, arg4, arg5, arg6, arg7))

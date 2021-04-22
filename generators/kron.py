@@ -36,6 +36,10 @@ def generate_graph(node_count, edge_count, abcd=(0.57, 0.19, 0.19, 0.05),
 
         ts = sorted(ts)
 
+        with open('./data/maps/'+file_hash+'.txt', "w+") as file:
+            for i in range(len(indices_map)):
+                file.write(f"{i} , {indices_map[i]}\n")
+            file.close()
         with open(dir + 'shuffled_' + file_hash + '.txt', "w+") as file:
             for EI in ts:
                 file.write("%d , %d\n" % (EI[0], EI[1]))

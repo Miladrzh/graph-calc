@@ -67,6 +67,11 @@ def run_test():
         out_deg_std = prop[3]
         clust_coef = prop[4]
     
+        if "shuffled" in file_hash:
+            order = "random"
+        else:
+            order = "vid"
+        print("this is the order : " + order)
         for k in ks:
             print("node_count: " + str(node_count))
             print("edge_count: " + str(edge_count))

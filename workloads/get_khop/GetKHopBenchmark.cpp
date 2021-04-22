@@ -2,6 +2,11 @@
 #include <boost/tokenizer.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/dynamic_bitset.hpp>
+#include <regex>
+#include <memory>
+#include <string>
+#include <stdexcept>  // For std::unique_ptr
+#include <stdarg.h>  // For va_start, etc.
 
 using namespace std;
 using namespace boost;
@@ -26,6 +31,49 @@ vector<Vertex> GetKHopBenchmark::getNeighboursVector(Vertex *vertex, Graph *grap
         vec.push_back(*neighbour);        
     }
     return vec;
+}
+
+map<int, int> GetKHopBenchmark::readMap()
+{
+    size_t vertices = nNodes;
+    map<int, int> mp;
+
+    string fullPath = GetKHopBenchmark::path;
+    char_separator<char> sep("/");
+    tokenizer<char_separator<char>> tokens(fullPath, sep);
+    string split_arr [4] = {};
+    int i = 0;
+    std::regex target("(.txt)+");
+    std::regex target1("(shuffled_)+");
+    std::string replacement="";
+    for (const auto& t : tokens) {
+        std::string s2 = std::regex_replace(t, target, replacement);
+        std::string s3 = std::regex_replace(s2, target1, replacement);
+        cout << s3 << " " << endl;
+
+        split_arr[i] = s3;
+        i+=1;
+    }
+    string graph_name = split_arr[3];
+    std::ostringstream path_strm;
+    path_strm << "./data/maps/" << graph_name << ".txt";
+
+    ifstream ifs(path_strm.str());
+
+    for (string s; getline(ifs, s);)
+    {
+
+        string delimiter = " , ";
+        string start = s.substr(0, s.find(delimiter));
+
+        s.erase(0, s.find(delimiter) + delimiter.length());
+
+        int from = stoi(start);
+        int to = stoi(s);
+        mp[from] = to;
+    }
+
+    return mp;
 }
 
 Graph GetKHopBenchmark::readGraph()
@@ -167,7 +215,7 @@ void GetKHopBenchmark::runExperiment()
     int nIter = nExpts;
     for (int i = 0; i < nIter; i++) 
     {   
-        pair<double, int> expRes = runBenchmark();
+        pair<double, int> expRes = runBenchmark(i);
         execTimes.push_back(expRes.first);       
         vsSeen.push_back(expRes.second);       
         cout << "Experiment: " << i << " took " <<
@@ -217,7 +265,30 @@ int GetKHopBenchmark::sample()
     return sortedWts[index].second;
 }
 
-pair<double, int> GetKHopBenchmark::runBenchmark()
+void GetKHopBenchmark::write_vector_to_file(const std::vector<int>& myVector, std::string filename)
+{   
+    string export_path = path;
+    std::ofstream ofs(filename, std::ios::out | std::ofstream::binary);
+    std::ostream_iterator<char> osi{ ofs };
+    const char* beginByte = (char*)&myVector[0];
+
+    const char* endByte = (char*)&myVector.back() + sizeof(int);
+    std::copy(beginByte, endByte, osi);
+}
+
+std::vector<int> GetKHopBenchmark::read_vector_from_file(std::string filename)
+{
+    std::vector<char> buffer{};
+    std::ifstream ifs(filename, std::ios::in | std::ifstream::binary);
+    std::istreambuf_iterator<char> iter(ifs);
+    std::istreambuf_iterator<char> end{};
+    std::copy(iter, end, std::back_inserter(buffer));
+    std::vector<int> newVector(buffer.size() / sizeof(int));
+    memcpy(&newVector[0], &buffer[0], buffer.size());
+    return newVector;
+}
+
+pair<double, int> GetKHopBenchmark::runBenchmark(int exptNumber)
 {   
     vector <Vertex> khopNeighbours[K+1]; // neighbour vertices for kth-hop
 
@@ -237,10 +308,49 @@ pair<double, int> GetKHopBenchmark::runBenchmark()
     for (int i = 0; i < nSamples; i++){
         sampledOrd.push_back(sample());
     }
+    
+    string fullPath = GetKHopBenchmark::path;
+    char_separator<char> sep("/");
+    tokenizer<char_separator<char>> tokens(fullPath, sep);
+    string split_arr [4] = {};
+    int i = 0;
+    std::regex target("(.txt)+");
+    std::regex target1("(shuffled_)+");
+    std::string replacement="";
+    for (const auto& t : tokens) {
+        std::string s2 = std::regex_replace(t, target, replacement);
+        std::string s3 = std::regex_replace(s2, target1, replacement);
+        cout << s3 << " " << endl;
+
+        split_arr[i] = s3;
+        i+=1;
+    }
+    string graph_name = split_arr[3];
+    std::ostringstream path_strm;
+    path_strm << "./data/orderings/" << graph_name << "_" << exptNumber;
 
     // keep a set of all neighbours seen
     // if the size of the set doesn't change after getting the k-neighbours
     // break
+    
+    if (order == "vid"){
+        write_vector_to_file(sampledOrd, path_strm.str());
+    }
+    if (order == "random") {
+
+        std::vector<int> read_vector = read_vector_from_file(path_strm.str());
+
+        map<int, int> rmp = readMap();
+        
+        sampledOrd.clear();
+        for (auto v : read_vector)
+        {
+            sampledOrd.push_back(rmp[v]);
+        }
+        // sampledOrd = read_vector;
+    }
+
+    
     dynamic_bitset<> verticesSeen(nNodes);
     int totalVsSeen = 0;
     for (auto it = sampledOrd.begin(); it != sampledOrd.end(); it++)

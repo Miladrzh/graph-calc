@@ -17,6 +17,7 @@ class GetKHopBenchmark
         vector<int> getVsSeen();
 
         Graph readGraph();
+        map<int, int> readMap();
 
         void printAllSinkIds();
         void printVertexOrder();
@@ -25,10 +26,12 @@ class GetKHopBenchmark
         vector<int> calcOrder(string);
         void calcAllSinkIds();
         void calcStats();
-        pair<double, int> runBenchmark();
+        pair<double, int> runBenchmark(int);
         void runExperiment();
         int sample();
 
+        void write_vector_to_file(const std::vector<int>& , std::string);
+        std::vector<int> read_vector_from_file(std::string);
         GetKHopBenchmark(size_t, string, int, string, int, int); 
 
         size_t nNodes;
