@@ -6,6 +6,7 @@
 namespace std {
    %template(IntVector) vector<int>;
    %template(DoubleVector) vector<double>;
+   %template(DoubleVectorVector) vector<vector<double>>;
 }
 %{
     /* Put header files here or function declarations like below */

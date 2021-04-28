@@ -15,6 +15,7 @@ class GetKHopBenchmark
         vector<pair<int, int>> getVectorWeights();
         vector<double> getExecTimes();
         vector<int> getVsSeen();
+        vector<vector<double>> getRepTimes();
 
         Graph readGraph();
         map<int, int> readMap();
@@ -26,23 +27,26 @@ class GetKHopBenchmark
         vector<int> calcOrder(string);
         void calcAllSinkIds();
         void calcStats();
-        pair<double, int> runBenchmark(int);
+        // pair<double, int> runBenchmark(int);
+        pair<vector<double>, int> runBenchmark(int);
         void runExperiment();
         int sample();
 
         void write_vector_to_file(const std::vector<int>& , std::string);
         std::vector<int> read_vector_from_file(std::string);
-        GetKHopBenchmark(size_t, string, int, string, int, int); 
+        GetKHopBenchmark(size_t, string, int, string, int, int, int); 
 
         size_t nNodes;
         int nSinks;
         int nIncomps; // number of times a khop query did not complete k hops
         int nSeenAll; // number of times a khop query returned all the vertices in the graph
+        int nExpts;
+        int nSamples;
+        int nReps;
+        
         string path;
         string order; 
-        int nExpts;
         int K;
-        int nSamples;
         double mean;
         double stdev;
         map<int, vector<Vertex>> khopNeighbours;
@@ -55,6 +59,7 @@ class GetKHopBenchmark
         Graph graph;
         vector<pair<int, int>> sortedWts;
         vector<int> cumSumWts;
+        vector<vector<double>> repTimes;
 };
 
 #endif

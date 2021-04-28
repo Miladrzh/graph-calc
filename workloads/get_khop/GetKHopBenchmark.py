@@ -334,6 +334,112 @@ class DoubleVector(object):
 # Register DoubleVector in _GetKHopBenchmark:
 _GetKHopBenchmark.DoubleVector_swigregister(DoubleVector)
 
+class DoubleVectorVector(object):
+    thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
+    __repr__ = _swig_repr
+
+    def iterator(self):
+        return _GetKHopBenchmark.DoubleVectorVector_iterator(self)
+    def __iter__(self):
+        return self.iterator()
+
+    def __nonzero__(self):
+        return _GetKHopBenchmark.DoubleVectorVector___nonzero__(self)
+
+    def __bool__(self):
+        return _GetKHopBenchmark.DoubleVectorVector___bool__(self)
+
+    def __len__(self):
+        return _GetKHopBenchmark.DoubleVectorVector___len__(self)
+
+    def __getslice__(self, i, j):
+        return _GetKHopBenchmark.DoubleVectorVector___getslice__(self, i, j)
+
+    def __setslice__(self, *args):
+        return _GetKHopBenchmark.DoubleVectorVector___setslice__(self, *args)
+
+    def __delslice__(self, i, j):
+        return _GetKHopBenchmark.DoubleVectorVector___delslice__(self, i, j)
+
+    def __delitem__(self, *args):
+        return _GetKHopBenchmark.DoubleVectorVector___delitem__(self, *args)
+
+    def __getitem__(self, *args):
+        return _GetKHopBenchmark.DoubleVectorVector___getitem__(self, *args)
+
+    def __setitem__(self, *args):
+        return _GetKHopBenchmark.DoubleVectorVector___setitem__(self, *args)
+
+    def pop(self):
+        return _GetKHopBenchmark.DoubleVectorVector_pop(self)
+
+    def append(self, x):
+        return _GetKHopBenchmark.DoubleVectorVector_append(self, x)
+
+    def empty(self):
+        return _GetKHopBenchmark.DoubleVectorVector_empty(self)
+
+    def size(self):
+        return _GetKHopBenchmark.DoubleVectorVector_size(self)
+
+    def swap(self, v):
+        return _GetKHopBenchmark.DoubleVectorVector_swap(self, v)
+
+    def begin(self):
+        return _GetKHopBenchmark.DoubleVectorVector_begin(self)
+
+    def end(self):
+        return _GetKHopBenchmark.DoubleVectorVector_end(self)
+
+    def rbegin(self):
+        return _GetKHopBenchmark.DoubleVectorVector_rbegin(self)
+
+    def rend(self):
+        return _GetKHopBenchmark.DoubleVectorVector_rend(self)
+
+    def clear(self):
+        return _GetKHopBenchmark.DoubleVectorVector_clear(self)
+
+    def get_allocator(self):
+        return _GetKHopBenchmark.DoubleVectorVector_get_allocator(self)
+
+    def pop_back(self):
+        return _GetKHopBenchmark.DoubleVectorVector_pop_back(self)
+
+    def erase(self, *args):
+        return _GetKHopBenchmark.DoubleVectorVector_erase(self, *args)
+
+    def __init__(self, *args):
+        _GetKHopBenchmark.DoubleVectorVector_swiginit(self, _GetKHopBenchmark.new_DoubleVectorVector(*args))
+
+    def push_back(self, x):
+        return _GetKHopBenchmark.DoubleVectorVector_push_back(self, x)
+
+    def front(self):
+        return _GetKHopBenchmark.DoubleVectorVector_front(self)
+
+    def back(self):
+        return _GetKHopBenchmark.DoubleVectorVector_back(self)
+
+    def assign(self, n, x):
+        return _GetKHopBenchmark.DoubleVectorVector_assign(self, n, x)
+
+    def resize(self, *args):
+        return _GetKHopBenchmark.DoubleVectorVector_resize(self, *args)
+
+    def insert(self, *args):
+        return _GetKHopBenchmark.DoubleVectorVector_insert(self, *args)
+
+    def reserve(self, n):
+        return _GetKHopBenchmark.DoubleVectorVector_reserve(self, n)
+
+    def capacity(self):
+        return _GetKHopBenchmark.DoubleVectorVector_capacity(self)
+    __swig_destroy__ = _GetKHopBenchmark.delete_DoubleVectorVector
+
+# Register DoubleVectorVector in _GetKHopBenchmark:
+_GetKHopBenchmark.DoubleVectorVector_swigregister(DoubleVectorVector)
+
 
 def getDegrees(arg1):
     return _GetKHopBenchmark.getDegrees(arg1)
@@ -364,6 +470,9 @@ class GetKHopBenchmark(object):
 
     def getVsSeen(self):
         return _GetKHopBenchmark.GetKHopBenchmark_getVsSeen(self)
+
+    def getRepTimes(self):
+        return _GetKHopBenchmark.GetKHopBenchmark_getRepTimes(self)
 
     def readGraph(self):
         return _GetKHopBenchmark.GetKHopBenchmark_readGraph(self)
@@ -407,17 +516,18 @@ class GetKHopBenchmark(object):
     def read_vector_from_file(self, arg2):
         return _GetKHopBenchmark.GetKHopBenchmark_read_vector_from_file(self, arg2)
 
-    def __init__(self, arg2, arg3, arg4, arg5, arg6, arg7):
-        _GetKHopBenchmark.GetKHopBenchmark_swiginit(self, _GetKHopBenchmark.new_GetKHopBenchmark(arg2, arg3, arg4, arg5, arg6, arg7))
+    def __init__(self, arg2, arg3, arg4, arg5, arg6, arg7, arg8):
+        _GetKHopBenchmark.GetKHopBenchmark_swiginit(self, _GetKHopBenchmark.new_GetKHopBenchmark(arg2, arg3, arg4, arg5, arg6, arg7, arg8))
     nNodes = property(_GetKHopBenchmark.GetKHopBenchmark_nNodes_get, _GetKHopBenchmark.GetKHopBenchmark_nNodes_set)
     nSinks = property(_GetKHopBenchmark.GetKHopBenchmark_nSinks_get, _GetKHopBenchmark.GetKHopBenchmark_nSinks_set)
     nIncomps = property(_GetKHopBenchmark.GetKHopBenchmark_nIncomps_get, _GetKHopBenchmark.GetKHopBenchmark_nIncomps_set)
     nSeenAll = property(_GetKHopBenchmark.GetKHopBenchmark_nSeenAll_get, _GetKHopBenchmark.GetKHopBenchmark_nSeenAll_set)
+    nExpts = property(_GetKHopBenchmark.GetKHopBenchmark_nExpts_get, _GetKHopBenchmark.GetKHopBenchmark_nExpts_set)
+    nSamples = property(_GetKHopBenchmark.GetKHopBenchmark_nSamples_get, _GetKHopBenchmark.GetKHopBenchmark_nSamples_set)
+    nReps = property(_GetKHopBenchmark.GetKHopBenchmark_nReps_get, _GetKHopBenchmark.GetKHopBenchmark_nReps_set)
     path = property(_GetKHopBenchmark.GetKHopBenchmark_path_get, _GetKHopBenchmark.GetKHopBenchmark_path_set)
     order = property(_GetKHopBenchmark.GetKHopBenchmark_order_get, _GetKHopBenchmark.GetKHopBenchmark_order_set)
-    nExpts = property(_GetKHopBenchmark.GetKHopBenchmark_nExpts_get, _GetKHopBenchmark.GetKHopBenchmark_nExpts_set)
     K = property(_GetKHopBenchmark.GetKHopBenchmark_K_get, _GetKHopBenchmark.GetKHopBenchmark_K_set)
-    nSamples = property(_GetKHopBenchmark.GetKHopBenchmark_nSamples_get, _GetKHopBenchmark.GetKHopBenchmark_nSamples_set)
     mean = property(_GetKHopBenchmark.GetKHopBenchmark_mean_get, _GetKHopBenchmark.GetKHopBenchmark_mean_set)
     stdev = property(_GetKHopBenchmark.GetKHopBenchmark_stdev_get, _GetKHopBenchmark.GetKHopBenchmark_stdev_set)
     khopNeighbours = property(_GetKHopBenchmark.GetKHopBenchmark_khopNeighbours_get, _GetKHopBenchmark.GetKHopBenchmark_khopNeighbours_set)
@@ -430,6 +540,7 @@ class GetKHopBenchmark(object):
     graph = property(_GetKHopBenchmark.GetKHopBenchmark_graph_get, _GetKHopBenchmark.GetKHopBenchmark_graph_set)
     sortedWts = property(_GetKHopBenchmark.GetKHopBenchmark_sortedWts_get, _GetKHopBenchmark.GetKHopBenchmark_sortedWts_set)
     cumSumWts = property(_GetKHopBenchmark.GetKHopBenchmark_cumSumWts_get, _GetKHopBenchmark.GetKHopBenchmark_cumSumWts_set)
+    repTimes = property(_GetKHopBenchmark.GetKHopBenchmark_repTimes_get, _GetKHopBenchmark.GetKHopBenchmark_repTimes_set)
     __swig_destroy__ = _GetKHopBenchmark.delete_GetKHopBenchmark
 
 # Register GetKHopBenchmark in _GetKHopBenchmark:

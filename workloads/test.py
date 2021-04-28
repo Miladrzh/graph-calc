@@ -34,7 +34,7 @@ def run_test():
     props = [(e.file_hash, e.node_count, e.edge_count) for e in all_entries]
 
     all_entries = GeneratedGraph.objects \
-        .filter(edge_count__lte=1500000) \
+        .filter(edge_count__lte=50000000) \
         # .filter(ordering='default')
     props = [(e.file_hash, e.node_count, e.edge_count, e.OutDegCnt_std, e.clust_coef) for e in all_entries]
     orders = ['vid', 'random', 'desc_deg']
@@ -48,6 +48,8 @@ def run_test():
     
     print(props)
     nSamples = 100
+    nReps = 10
+    nExpts = 5
     print(props)
     
     # delete all workloads results before running the expt
@@ -77,24 +79,26 @@ def run_test():
             print("edge_count: " + str(edge_count))
             print("k: " + str(k))
             # create the benchmark
-            bmark = B.GetKHopBenchmark(node_count, path, k, order, 10, nSamples)
+            bmark = B.GetKHopBenchmark(node_count, path, k, order, nExpts, nSamples, nReps)
             bmark.runExperiment()
-            bmark.calcStats()
-
-            exec_times = np.array(bmark.getExecTimes())
+            # bmark.calcStats()
+            n_sinks = bmark.nSinks
+            # exec_times = np.array(bmark.getExecTimes())
+            repTimes = np.array(bmark.getRepTimes())
             vs_seen = np.array(bmark.getVsSeen())
 
-            print(vs_seen);
             exp_num = 1
-            for etime, vs in zip(exec_times, vs_seen):
-                # print(obj.file_hash, exp_num, etime)
+            print(f'{order} experiment')
+            for rtimes, vs in zip(repTimes, vs_seen):
                 # write to workload result model
                 WorkloadResult.objects.create(
                     file_hash=obj, 
                     experiment='2HOP',
                     exp_num=exp_num,
-                    duration=etime,
+                    mean_duration=rtimes.mean(),
+                    std_duration=rtimes.std(),
                     result=vs,
+                    n_sinks=n_sinks,
                 )
                 exp_num+=1
             del bmark
